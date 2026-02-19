@@ -19,7 +19,6 @@ var current_char: Personagem:
 		current_char = value
 		if current_char:
 			current_char.selected = true
-#var personagens: Array[Personagem] = []
 
 func _ready() -> void:
 	state_machine.ChangeState(start_state)

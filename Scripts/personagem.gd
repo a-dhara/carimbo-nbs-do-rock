@@ -29,8 +29,8 @@ var dist: int = 4: # Distância de movimento, alterada pelo efeito de lentidão
 		if lento > 0:
 			return int(dist_max / 2.0)
 		return dist_max
-@export var veloc_max: float = 600.0 # Velocidade máxima de movimento do personagem, p/s
-var veloc_mov: float = 600.0: # velocidade de movimento, afetada pela lentidão
+@export var veloc_max: float = 4.0 # Velocidade máxima de movimento do personagem, m/s
+var veloc_mov: float = 4.0: # velocidade de movimento, afetada pela lentidão
 	get():
 		if lento > 0:
 			return veloc_max / 2.0
@@ -62,6 +62,7 @@ var carimbo_carr: bool:
 	get():
 		return carimbo.carregado
 var pos_grid: Vector2i # Posição no grid
+var tiles_caminho: PackedVector2Array = []
 #endregion
 
 #region Funções de ajuste
@@ -74,12 +75,24 @@ func Place(alvo: Vector2i) -> void:
 	
 	if alvo != null: # Se não tiver ido embora
 		grid.conteudo[pos_grid] = self # Coloca a referência de si na posição nova
-	Ajeita()
 
 ## Ajeita a posição do personagem pro centro da célula em que ele estiver
 func Ajeita() -> void:
 	position = grid.calcula_pos_mapa(pos_grid)
 #endregion
+
+func Caminhar(final: Vector2i) -> void:
+	Place(final)
+	print(tiles_caminho)
+	for t in tiles_caminho:
+		var tween: Tween = create_tween()
+		tween.tween_property(
+			self, "position", grid.calcula_pos_mapa(Vector2i(t)), 1.0/veloc_mov
+		).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		
+		await tween.finished
+
+
 
 func _ready() -> void:
 	turno = Turn.new(self)

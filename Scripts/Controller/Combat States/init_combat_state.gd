@@ -27,7 +27,7 @@ func SpawnTestUnits() -> void:
 		if i == 3:
 			p = Vector2i(1,2)
 		pers.Place(p)
-		
+		pers.Ajeita()
 	
 	
 	pass

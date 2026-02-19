@@ -52,14 +52,13 @@ func Confirm() -> void:
 			print("carregou!!!")
 		1:
 			print("andar!!")
-#			_owner.state_machine.ChangeState(move_selection_state)
+			_owner.state_machine.ChangeState(move_selection_state)
 		2:
 			print("ataque!!")
 
 func HaInimigosPerto(pos_grid: Vector2i) -> bool:
 	var out: bool = false
-	var dirs: Array[Vector2i] = [Vector2i(-1,0), Vector2i(1,0), Vector2i(0,-1), Vector2i(0,1)]
-	for d in dirs:
+	for d in _owner.board.DIRECTIONS:
 		if _owner.board.conteudo.has(pos_grid + d):
 			var obj = _owner.board.conteudo[pos_grid + d]
 			if obj is Personagem and obj.inimigo:

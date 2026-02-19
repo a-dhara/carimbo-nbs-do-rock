@@ -38,7 +38,7 @@ func Show(char_pos: Vector2) -> void:
 	await panel.SetPosition(char_pos + character_offset, true)
 
 func Hide() -> void:
-	await panel.SetPosition(panel.position, true)
+	await panel.SetPosition(panel.position, false)
 	panel.SetHidden()
 	Clear()
 	_DisableNode(panel)
