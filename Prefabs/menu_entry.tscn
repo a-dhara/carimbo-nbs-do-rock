@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy4y0dp6gtipy"]
+
+[ext_resource type="Script" uid="uid://c30drsctfrxf6" path="res://Scripts/Common/UI/menu_entry.gd" id="1_yhivs"]
+
+[node name="MenuEntry" type="TextureRect"]
+stretch_mode = 3
+script = ExtResource("1_yhivs")

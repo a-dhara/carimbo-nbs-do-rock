@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Grid" load_steps=2 format=3 uid="uid://b7a3tl34xk6rj"]
+
+[ext_resource type="Script" uid="uid://db6o7oeskiu5q" path="res://Scripts/grid.gd" id="1_hy5dp"]
+
+[resource]
+script = ExtResource("1_hy5dp")
+tamanho = Vector2i(12, 8)
+tam_cell = Vector2i(32, 32)
+metadata/_custom_type_script = "uid://db6o7oeskiu5q"
