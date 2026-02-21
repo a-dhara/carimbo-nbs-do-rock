@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://co7s5lm0yyc3u" path="res://Scripts/carimbo.gd" id="3_4rqik"]
 [ext_resource type="Texture2D" uid="uid://7doaj303v6dg" path="res://Textures/selected-placeholder.png" id="3_sj1d8"]
 [ext_resource type="FontFile" uid="uid://bf3ra4xupxlyw" path="res://Textures/pixelart.ttf" id="4_4rqik"]
-[ext_resource type="Texture2D" uid="uid://dwrrjta7jb411" path="res://Textures/tinta-normal-phdr.png" id="4_av2s2"]
-[ext_resource type="Texture2D" uid="uid://bqrnovuem7qao" path="res://Textures/barra_de_carimbada0.png" id="7_4rqik"]
+[ext_resource type="Texture2D" uid="uid://dwrrjta7jb411" path="res://Textures/Icons/tinta-normal-phdr.png" id="4_av2s2"]
+[ext_resource type="Texture2D" uid="uid://bqrnovuem7qao" path="res://Textures/Icons/barra_de_carimbada0.png" id="7_4rqik"]
 [ext_resource type="Texture2D" uid="uid://crd1b1eitvdxq" path="res://Textures/sprite_base.png" id="7_svfxi"]
 
 [sub_resource type="Resource" id="Resource_av2s2"]

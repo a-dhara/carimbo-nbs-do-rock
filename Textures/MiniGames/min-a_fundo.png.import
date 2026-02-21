@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tyj0tktal33b"
-path="res://.godot/imported/carimbo-normal-phdr.png-3219d7fb0e41d23907cebe9554857c75.ctex"
+uid="uid://ceb3835k4abr6"
+path="res://.godot/imported/min-a_fundo.png-cea4f09311c837f94de901b5ab5bd9ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/carimbo-normal-phdr.png"
-dest_files=["res://.godot/imported/carimbo-normal-phdr.png-3219d7fb0e41d23907cebe9554857c75.ctex"]
+source_file="res://Textures/MiniGames/min-a_fundo.png"
+dest_files=["res://.godot/imported/min-a_fundo.png-cea4f09311c837f94de901b5ab5bd9ba.ctex"]
 
 [params]
 

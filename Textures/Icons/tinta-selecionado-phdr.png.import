@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dh5eghvm2fawh"
-path="res://.godot/imported/tinta-cheia-phdr.png-28d417968aab55bee9cfdfca3f7b8393.ctex"
+uid="uid://decfnmt8joitv"
+path="res://.godot/imported/tinta-selecionado-phdr.png-e63f44a91d3cf2e5ef8673def86992e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/tinta-cheia-phdr.png"
-dest_files=["res://.godot/imported/tinta-cheia-phdr.png-28d417968aab55bee9cfdfca3f7b8393.ctex"]
+source_file="res://Textures/Icons/tinta-selecionado-phdr.png"
+dest_files=["res://.godot/imported/tinta-selecionado-phdr.png-e63f44a91d3cf2e5ef8673def86992e5.ctex"]
 
 [params]
 

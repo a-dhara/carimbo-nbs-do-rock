@@ -14,11 +14,11 @@ class_name Personagem
 #endregion
 
 #region Textures
-var tex_carimbos: Array[Texture2D] = [preload("res://Textures/barra_de_carimbada0.png"),
-preload("res://Textures/barra_de_carimbada1.png"),
-preload("res://Textures/barra_de_carimbada2.png"),
-preload("res://Textures/barra_de_carimbada3.png")]
-var tex_tintas: Array[Texture2D] = [preload("res://Textures/tinta-normal-phdr.png"), preload("res://Textures/tinta-cheia-phdr.png")]
+var tex_carimbos: Array[Texture2D] = [preload("res://Textures/Icons/barra_de_carimbada0.png"),
+preload("res://Textures/Icons/barra_de_carimbada1.png"),
+preload("res://Textures/Icons/barra_de_carimbada2.png"),
+preload("res://Textures/Icons/barra_de_carimbada3.png")]
+var tex_tintas: Array[Texture2D] = [preload("res://Textures/Icons/tinta-normal-phdr.png"), preload("res://Textures/Icons/tinta-cheia-phdr.png")]
 #endregion
 
 #region Atributos do Personagem
@@ -43,7 +43,7 @@ var veloc_mov: float = 4.0: # velocidade de movimento, afetada pela lentidão
 @export var carimbadas: int = 0:
 	set(value):
 		carimbadas = value
-		carimbos_sprite.texture = tex_carimbos[value + 1]
+		carimbos_sprite.texture = tex_carimbos[value]
 var selected: bool = false:
 	set(value):
 		selected = value
@@ -83,7 +83,6 @@ func Ajeita() -> void:
 
 func Caminhar(final: Vector2i) -> void:
 	Place(final)
-	print(tiles_caminho)
 	for t in tiles_caminho:
 		var tween: Tween = create_tween()
 		tween.tween_property(

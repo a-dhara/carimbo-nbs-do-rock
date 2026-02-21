@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://decfnmt8joitv"
-path="res://.godot/imported/tinta-selecionado-phdr.png-f4b74440529fe44466172c68269978b3.ctex"
+uid="uid://tyj0tktal33b"
+path="res://.godot/imported/carimbo-normal-phdr.png-549c82f230265166f0ca2abbbbedf6c8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/tinta-selecionado-phdr.png"
-dest_files=["res://.godot/imported/tinta-selecionado-phdr.png-f4b74440529fe44466172c68269978b3.ctex"]
+source_file="res://Textures/Icons/carimbo-normal-phdr.png"
+dest_files=["res://.godot/imported/carimbo-normal-phdr.png-549c82f230265166f0ca2abbbbedf6c8.ctex"]
 
 [params]
 

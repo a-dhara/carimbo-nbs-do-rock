@@ -1,6 +1,7 @@
 extends CombatState
 
 @export var move_selection_state: State
+@export var attack_selection_state: State
 @export var select_unit_state: State
 
 @export var menu_options: Array[Texture2D] = []
@@ -38,9 +39,9 @@ func OnMouseMotion(_e: Vector2) -> void:
 
 func LoadMenu() -> void:
 	action_menu_controller.StartEntries(menu_options)
-	action_menu_controller.SetLocked(0, current_char.carimbo_carr)
+	action_menu_controller.SetLocked(0, current_char.carimbo_carr or current_char.turno.ja_agiu)
 	action_menu_controller.SetLocked(1, current_char.turno.ja_moveu)
-	action_menu_controller.SetLocked(2, not HaInimigosPerto(current_char.pos_grid))
+	action_menu_controller.SetLocked(2, not _owner.board.GetAttackableCells(current_char).size() != 0 or current_char.turno.ja_agiu or not current_char.carimbo_carr)
 	await action_menu_controller.Show(current_char.position)
 
 func Cancel() -> void:
@@ -49,18 +50,13 @@ func Cancel() -> void:
 func Confirm() -> void:
 	match action_menu_controller.selection:
 		0:
-			print("carregou!!!")
+			current_char.carimbo_carr = true
+			current_char.turno.ja_agiu = true
+			if current_char.turno.ja_moveu:
+				_owner.state_machine.ChangeState(select_unit_state)
+			else:
+				_owner.state_machine.ChangeState(self)
 		1:
-			print("andar!!")
 			_owner.state_machine.ChangeState(move_selection_state)
 		2:
-			print("ataque!!")
-
-func HaInimigosPerto(pos_grid: Vector2i) -> bool:
-	var out: bool = false
-	for d in _owner.board.DIRECTIONS:
-		if _owner.board.conteudo.has(pos_grid + d):
-			var obj = _owner.board.conteudo[pos_grid + d]
-			if obj is Personagem and obj.inimigo:
-				out = true
-	return out
+			_owner.state_machine.ChangeState(attack_selection_state)

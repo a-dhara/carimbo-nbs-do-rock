@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwrrjta7jb411"
-path="res://.godot/imported/tinta-normal-phdr.png-d427e76fb23a7b8a34022d9ab78ac24d.ctex"
+uid="uid://dewxc4sc5lhdk"
+path="res://.godot/imported/barra_de_carimbada2.png-958b32cd6be18a36ccd055f0efc8170e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/tinta-normal-phdr.png"
-dest_files=["res://.godot/imported/tinta-normal-phdr.png-d427e76fb23a7b8a34022d9ab78ac24d.ctex"]
+source_file="res://Textures/Icons/barra_de_carimbada2.png"
+dest_files=["res://.godot/imported/barra_de_carimbada2.png-958b32cd6be18a36ccd055f0efc8170e.ctex"]
 
 [params]
 

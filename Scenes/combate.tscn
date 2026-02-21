@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cdp6csle1j3lm"]
+[gd_scene load_steps=24 format=3 uid="uid://cdp6csle1j3lm"]
 
 [ext_resource type="Script" uid="uid://csen6jgssgagt" path="res://Scripts/Controller/input_controller.gd" id="1_cbf7q"]
 [ext_resource type="Script" uid="uid://c8urpj3ab8e2k" path="res://Scripts/Common/State Machine/state_machine.gd" id="1_kmyeg"]
@@ -9,16 +9,19 @@
 [ext_resource type="Script" uid="uid://d1vr65tbyslrw" path="res://Scripts/Controller/Combat States/select_unit_state.gd" id="4_ajawo"]
 [ext_resource type="Script" uid="uid://b44wghthi6ta1" path="res://Scripts/Controller/Combat States/action_selection_state.gd" id="6_jn6a6"]
 [ext_resource type="Script" uid="uid://ddaxcikhv2r5o" path="res://Scripts/Controller/action_menu_controller.gd" id="7_g812j"]
-[ext_resource type="Texture2D" uid="uid://dwrrjta7jb411" path="res://Textures/tinta-normal-phdr.png" id="7_l30wr"]
-[ext_resource type="Texture2D" uid="uid://decfnmt8joitv" path="res://Textures/tinta-selecionado-phdr.png" id="8_1ae6r"]
-[ext_resource type="Texture2D" uid="uid://sqj480i3syhy" path="res://Textures/move-normal-phdr.png" id="9_b1eki"]
-[ext_resource type="Texture2D" uid="uid://byn2umxbox2vi" path="res://Textures/move-selecionado-phdr.png" id="10_vpq6e"]
-[ext_resource type="Texture2D" uid="uid://tyj0tktal33b" path="res://Textures/carimbo-normal-phdr.png" id="11_1425y"]
-[ext_resource type="Texture2D" uid="uid://cl816ror0hw4o" path="res://Textures/carimbo-selecionado-phdr.png" id="12_vwed7"]
+[ext_resource type="Texture2D" uid="uid://dwrrjta7jb411" path="res://Textures/Icons/tinta-normal-phdr.png" id="7_l30wr"]
+[ext_resource type="Texture2D" uid="uid://decfnmt8joitv" path="res://Textures/Icons/tinta-selecionado-phdr.png" id="8_1ae6r"]
+[ext_resource type="Texture2D" uid="uid://sqj480i3syhy" path="res://Textures/Icons/move-normal-phdr.png" id="9_b1eki"]
+[ext_resource type="Texture2D" uid="uid://byn2umxbox2vi" path="res://Textures/Icons/move-selecionado-phdr.png" id="10_vpq6e"]
+[ext_resource type="Texture2D" uid="uid://tyj0tktal33b" path="res://Textures/Icons/carimbo-normal-phdr.png" id="11_1425y"]
+[ext_resource type="Texture2D" uid="uid://cl816ror0hw4o" path="res://Textures/Icons/carimbo-selecionado-phdr.png" id="12_vwed7"]
 [ext_resource type="Script" uid="uid://cnoit0jumxisf" path="res://Scripts/Controller/Combat States/move_selection_state.gd" id="13_vpq6e"]
 [ext_resource type="Script" uid="uid://b45whgkcwk4ag" path="res://Scripts/Controller/Combat States/move_sequence_state.gd" id="14_1425y"]
 [ext_resource type="Script" uid="uid://coklfq5mcd7y5" path="res://Scripts/Common/UI/action_menu_panel.gd" id="15_1ae6r"]
 [ext_resource type="PackedScene" uid="uid://dy4y0dp6gtipy" path="res://Prefabs/menu_entry.tscn" id="15_b1eki"]
+[ext_resource type="Script" uid="uid://ftaybp273t4i" path="res://Scripts/Controller/Combat States/attack_selection_state.gd.gd" id="15_vwed7"]
+[ext_resource type="Script" uid="uid://d014tbsjg08ot" path="res://Scripts/Controller/Combat States/minigame_state.gd" id="16_wscom"]
+[ext_resource type="PackedScene" uid="uid://dgn5tgosbaxrk" path="res://Scenes/mini_game_marmota.tscn" id="21_wscom"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b1eki"]
 
@@ -45,9 +48,10 @@ select_unit_state = NodePath("../SelectUnitState")
 script = ExtResource("4_ajawo")
 action_selection_state = NodePath("../ActionSelectionState")
 
-[node name="ActionSelectionState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("move_selection_state", "select_unit_state")]
+[node name="ActionSelectionState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("move_selection_state", "attack_selection_state", "select_unit_state")]
 script = ExtResource("6_jn6a6")
 move_selection_state = NodePath("../MoveSelectionState")
+attack_selection_state = NodePath("../AttackSelectionState")
 select_unit_state = NodePath("../SelectUnitState")
 menu_options = Array[Texture2D]([ExtResource("7_l30wr"), ExtResource("8_1ae6r"), ExtResource("9_b1eki"), ExtResource("10_vpq6e"), ExtResource("11_1425y"), ExtResource("12_vwed7")])
 
@@ -59,6 +63,17 @@ action_selection_state = NodePath("../ActionSelectionState")
 [node name="MoveSequenceState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("select_unit_state")]
 script = ExtResource("14_1425y")
 select_unit_state = NodePath("../SelectUnitState")
+
+[node name="AttackSelectionState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("action_selection_state", "select_unit_state", "mini_game_state")]
+script = ExtResource("15_vwed7")
+action_selection_state = NodePath("../ActionSelectionState")
+select_unit_state = NodePath("../SelectUnitState")
+mini_game_state = NodePath("../MiniGameState")
+
+[node name="MiniGameState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("select_unit_state")]
+script = ExtResource("16_wscom")
+select_unit_state = NodePath("../SelectUnitState")
+mini_game_marmota = ExtResource("21_wscom")
 
 [node name="InputController" type="Node" parent="CombatController"]
 script = ExtResource("1_cbf7q")

@@ -20,5 +20,7 @@ var current_char: Personagem:
 		if current_char:
 			current_char.selected = true
 
+var curr_enemy: Personagem
+
 func _ready() -> void:
 	state_machine.ChangeState(start_state)

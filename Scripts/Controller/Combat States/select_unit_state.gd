@@ -17,9 +17,10 @@ func OnPress(_e: bool) -> void:
 	if _e:
 		if _owner.board.conteudo.has(_owner.board.pos):
 			var obj = _owner.board.conteudo[_owner.board.pos]
-			if obj is Personagem and not obj.inimigo:
-				current_char = obj
-				_owner.state_machine.ChangeState(action_selection_state)
+			if obj is Personagem and not obj.inimigo: # Tá um pouquinho hard coded mas vambora
+				if (not obj.turno.ja_agiu and ((not obj.carimbo_carr) or _owner.board.GetAttackableCells(obj).size() != 0)) or (not obj.turno.ja_moveu):
+					current_char = obj
+					_owner.state_machine.ChangeState(action_selection_state)
 		else:
 			current_char = null
 	else:

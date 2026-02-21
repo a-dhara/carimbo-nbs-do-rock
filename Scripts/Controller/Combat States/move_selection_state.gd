@@ -11,7 +11,7 @@ func Enter() -> void:
 	super()
 	tiles = _owner.board.GetWalkableCells(current_char)
 	_path_finder = PathFinder.new(_owner.board.grid, tiles)
-	_owner.board.SelectTiles(tiles)
+	_owner.board.SelectTiles(tiles, true)
 
 func Exit() -> void:
 	super()

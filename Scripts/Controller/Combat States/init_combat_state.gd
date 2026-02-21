@@ -17,6 +17,8 @@ func SpawnTestUnits() -> void:
 	for i in 4:
 		var pers: Personagem = _owner.pers_prefab.instantiate()
 		pers.carimbo = Carimbo.new()
+		if i == 0:
+			pers.carimbo.tipo = pers.carimbo.Tipos.DIST
 		_owner.add_child(pers)
 		var p: Vector2i = Vector2i(0,2*i)
 		if i == 0:

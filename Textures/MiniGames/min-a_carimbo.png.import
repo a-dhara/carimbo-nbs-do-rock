@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dewxc4sc5lhdk"
-path="res://.godot/imported/barra_de_carimbada2.png-29a4e36e155ec14cff9308b74b8d577b.ctex"
+uid="uid://54ya33s3gsya"
+path="res://.godot/imported/min-a_carimbo.png-2d002c1d52155d93b0434e0338dca2f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/barra_de_carimbada2.png"
-dest_files=["res://.godot/imported/barra_de_carimbada2.png-29a4e36e155ec14cff9308b74b8d577b.ctex"]
+source_file="res://Textures/MiniGames/min-a_carimbo.png"
+dest_files=["res://.godot/imported/min-a_carimbo.png-2d002c1d52155d93b0434e0338dca2f9.ctex"]
 
 [params]
 

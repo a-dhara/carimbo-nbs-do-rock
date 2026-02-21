@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqrnovuem7qao"
-path="res://.godot/imported/barra_de_carimbada0.png-0a7f6e76fbeb8044097d3c212bcf3771.ctex"
+uid="uid://byn2umxbox2vi"
+path="res://.godot/imported/move-selecionado-phdr.png-0559bbd6f8c57f8ff264fb38dbf0b930.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/barra_de_carimbada0.png"
-dest_files=["res://.godot/imported/barra_de_carimbada0.png-0a7f6e76fbeb8044097d3c212bcf3771.ctex"]
+source_file="res://Textures/Icons/move-selecionado-phdr.png"
+dest_files=["res://.godot/imported/move-selecionado-phdr.png-0559bbd6f8c57f8ff264fb38dbf0b930.ctex"]
 
 [params]
 

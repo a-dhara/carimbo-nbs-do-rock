@@ -29,7 +29,6 @@ func _ready() -> void:
 	pos = Vector2i(0,0)
 	_old_pos = pos
 	
-	cell_overlay.modulate = Color(0.0, 0.0, 1.0, 0.325)
 
 
 func GetTileContent(p: Vector2i) -> Node:
@@ -38,9 +37,10 @@ func GetTileContent(p: Vector2i) -> Node:
 
 #region FloodFill e busca de células caminháveis
 
-func _FloodFill(cell: Vector2i, dist_max: int) -> Array[Vector2i]:
+func _FloodFill(cell: Vector2i, dist_max: int, w_or_a: bool) -> Array[Vector2i]:
 	var array: Array[Vector2i] = []
 	var stack: Array[Vector2i] = [cell]
+	var out_a: Array[Vector2i] = []
 	
 	while not stack.size() == 0:
 		var curr: Vector2i = stack.pop_back()
@@ -56,25 +56,35 @@ func _FloodFill(cell: Vector2i, dist_max: int) -> Array[Vector2i]:
 			continue
 		
 		array.append(curr)
+		if not w_or_a and GetTileContent(curr) is Personagem and GetTileContent(curr).inimigo:
+			out_a.append(curr)
 		for dir in DIRECTIONS:
 			var coords: Vector2i = curr + dir
-			if GetTileContent(coords) != null:
+			if w_or_a and GetTileContent(coords) != null:
 				continue
 			if coords in array:
 				continue
 			if coords in stack:
 				continue
 			stack.append(coords)
-	
+	if not w_or_a:
+		return out_a
 	return array
 
 func GetWalkableCells(pers: Personagem) -> Array[Vector2i]:
-	return _FloodFill(pers.pos_grid, pers.dist)
+	return _FloodFill(pers.pos_grid, pers.dist, true)
+
+func GetAttackableCells(pers: Personagem) -> Array[Vector2i]:
+	return _FloodFill(pers.pos_grid, pers.carimbo.dist, false)
 
 #endregion
 
 
-func SelectTiles(tile_list: Array[Vector2i]) -> void:
+func SelectTiles(tile_list: Array[Vector2i], w_or_a: bool) -> void:
+	if w_or_a:
+		cell_overlay.modulate = Color(0.0, 0.0, 1.0, 0.325)
+	else:
+		cell_overlay.modulate = Color(1.0, 0.0, 0.0, 0.325)
 	for t in tile_list:
 		cell_overlay.set_cell(t, 0, Vector2i(0,0))
 
