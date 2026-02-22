@@ -97,3 +97,6 @@ func _ready() -> void:
 	turno = Turn.new(self)
 	add_child(turno)
 	turno.Reinicia()
+	Place(grid.calcula_coord_grid(global_position))
+	Ajeita()
+	if carimbo.tipo == carimbo.Tipos.AUTOM: carimbo_carr = true

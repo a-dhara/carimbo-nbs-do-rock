@@ -1,6 +1,6 @@
 extends CombatState
 
-@export var select_unit_state: State
+@export var dialogue_state: State
 
 func Enter() -> void:
 	super()
@@ -9,9 +9,9 @@ func Enter() -> void:
 
 func Init() -> void:
 	# carrega o mapa (?)
-	SpawnTestUnits()
+	#SpawnTestUnits()
 	
-	_owner.state_machine.ChangeState(select_unit_state)
+	_owner.state_machine.ChangeState(dialogue_state)
 
 func SpawnTestUnits() -> void:
 	for i in 4:

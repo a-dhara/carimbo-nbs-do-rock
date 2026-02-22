@@ -14,7 +14,7 @@ signal mini_game_ended
 
 var _marmotas: Array[Marmota] = []
 var pont: int = 0
-var tempo_max: float = 5
+var tempo_max: float = 20
 var pont_obj: int = 20
 
 func _ready() -> void:

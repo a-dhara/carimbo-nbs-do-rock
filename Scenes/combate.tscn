@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cdp6csle1j3lm"]
+[gd_scene load_steps=36 format=3 uid="uid://cdp6csle1j3lm"]
 
 [ext_resource type="Script" uid="uid://csen6jgssgagt" path="res://Scripts/Controller/input_controller.gd" id="1_cbf7q"]
 [ext_resource type="Script" uid="uid://c8urpj3ab8e2k" path="res://Scripts/Common/State Machine/state_machine.gd" id="1_kmyeg"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://d33nx0nnhey" path="res://Scripts/Controller/Combat States/init_combat_state.gd" id="3_ajawo"]
 [ext_resource type="PackedScene" uid="uid://ggk6ouop1u2v" path="res://Scenes/board.tscn" id="4_25f7f"]
 [ext_resource type="Script" uid="uid://d1vr65tbyslrw" path="res://Scripts/Controller/Combat States/select_unit_state.gd" id="4_ajawo"]
+[ext_resource type="Script" uid="uid://6fhb414cxtee" path="res://Scripts/Controller/Combat States/dialogue_state.gd" id="5_pv8qf"]
 [ext_resource type="Script" uid="uid://b44wghthi6ta1" path="res://Scripts/Controller/Combat States/action_selection_state.gd" id="6_jn6a6"]
 [ext_resource type="Script" uid="uid://ddaxcikhv2r5o" path="res://Scripts/Controller/action_menu_controller.gd" id="7_g812j"]
 [ext_resource type="Texture2D" uid="uid://dwrrjta7jb411" path="res://Textures/Icons/tinta-normal-phdr.png" id="7_l30wr"]
@@ -21,9 +22,50 @@
 [ext_resource type="PackedScene" uid="uid://dy4y0dp6gtipy" path="res://Prefabs/menu_entry.tscn" id="15_b1eki"]
 [ext_resource type="Script" uid="uid://ftaybp273t4i" path="res://Scripts/Controller/Combat States/attack_selection_state.gd.gd" id="15_vwed7"]
 [ext_resource type="Script" uid="uid://d014tbsjg08ot" path="res://Scripts/Controller/Combat States/minigame_state.gd" id="16_wscom"]
+[ext_resource type="Script" uid="uid://cn70yrfy17vof" path="res://Scripts/Common/UI/conversation_panel.gd" id="19_ou37v"]
+[ext_resource type="Script" uid="uid://db80vididg1" path="res://Scripts/Controller/conversation_controller.gd" id="19_tb1mv"]
+[ext_resource type="FontFile" uid="uid://bf3ra4xupxlyw" path="res://Textures/pixelart.ttf" id="21_6p7qo"]
 [ext_resource type="PackedScene" uid="uid://dgn5tgosbaxrk" path="res://Scenes/mini_game_marmota.tscn" id="21_wscom"]
+[ext_resource type="Script" uid="uid://co7s5lm0yyc3u" path="res://Scripts/carimbo.gd" id="27_pv8qf"]
+
+[sub_resource type="Gradient" id="Gradient_ou37v"]
+offsets = PackedFloat32Array(0.37333333)
+colors = PackedColorArray(0.1148968, 0.11489681, 0.1148968, 0.2901961)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0qnsc"]
+gradient = SubResource("Gradient_ou37v")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5u3qn"]
+bg_color = Color(0.14509805, 0.14509805, 0.1764706, 0.5882353)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b1eki"]
+
+[sub_resource type="Resource" id="Resource_l281v"]
+script = ExtResource("27_pv8qf")
+tipo = 2
+metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
+
+[sub_resource type="Resource" id="Resource_fss22"]
+script = ExtResource("27_pv8qf")
+metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
+
+[sub_resource type="Resource" id="Resource_lce2y"]
+script = ExtResource("27_pv8qf")
+tipo = 3
+metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
+
+[sub_resource type="Resource" id="Resource_omttw"]
+script = ExtResource("27_pv8qf")
+metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
 
 [node name="Combate" type="Node2D"]
 
@@ -31,7 +73,7 @@
 script = ExtResource("1_vq3xa")
 board = NodePath("Board")
 input_controller = NodePath("InputController")
-conversation_controller = NodePath("ConversationController")
+conversation_controller = NodePath("DialogueController")
 action_menu_controller = NodePath("ActionMenuController")
 state_machine = NodePath("StateMachine")
 start_state = NodePath("StateMachine/InitCombatState")
@@ -40,8 +82,12 @@ pers_prefab = ExtResource("2_h2ffh")
 [node name="StateMachine" type="Node" parent="CombatController"]
 script = ExtResource("1_kmyeg")
 
-[node name="InitCombatState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("select_unit_state")]
+[node name="InitCombatState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("dialogue_state")]
 script = ExtResource("3_ajawo")
+dialogue_state = NodePath("../DialogueState")
+
+[node name="DialogueState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("select_unit_state")]
+script = ExtResource("5_pv8qf")
 select_unit_state = NodePath("../SelectUnitState")
 
 [node name="SelectUnitState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("action_selection_state")]
@@ -70,15 +116,91 @@ action_selection_state = NodePath("../ActionSelectionState")
 select_unit_state = NodePath("../SelectUnitState")
 mini_game_state = NodePath("../MiniGameState")
 
-[node name="MiniGameState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("select_unit_state")]
+[node name="MiniGameState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("action_selection_state")]
 script = ExtResource("16_wscom")
-select_unit_state = NodePath("../SelectUnitState")
+action_selection_state = NodePath("../ActionSelectionState")
 mini_game_marmota = ExtResource("21_wscom")
 
 [node name="InputController" type="Node" parent="CombatController"]
 script = ExtResource("1_cbf7q")
 
-[node name="ConversationController" type="Node" parent="CombatController"]
+[node name="DialogueController" type="Node" parent="CombatController" node_paths=PackedStringArray("panel", "rect")]
+script = ExtResource("19_tb1mv")
+panel = NodePath("ConversationPanel")
+rect = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="CombatController/DialogueController"]
+visible = false
+offset_left = -57.0
+offset_top = -34.0
+offset_right = 444.0
+offset_bottom = 302.0
+texture = SubResource("GradientTexture1D_0qnsc")
+
+[node name="ConversationPanel" type="Panel" parent="CombatController/DialogueController" node_paths=PackedStringArray("text", "name_l", "name_r", "img_l", "img_r")]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -116.5
+offset_top = -110.0
+offset_right = 116.5
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5u3qn")
+script = ExtResource("19_ou37v")
+text = NodePath("Text")
+name_l = NodePath("Name")
+name_r = NodePath("Name2")
+img_l = NodePath("ImgPers")
+img_r = NodePath("ImgPers2")
+
+[node name="Text" type="Label" parent="CombatController/DialogueController/ConversationPanel"]
+layout_mode = 1
+offset_left = 5.5
+offset_top = 5.0
+offset_right = 230.5
+offset_bottom = 71.0
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("21_6p7qo")
+theme_override_font_sizes/font_size = 11
+autowrap_mode = 2
+
+[node name="ImgPers" type="TextureRect" parent="CombatController/DialogueController/ConversationPanel"]
+layout_mode = 0
+offset_top = -62.0
+offset_right = 64.0
+offset_bottom = 2.0
+
+[node name="Name" type="Label" parent="CombatController/DialogueController/ConversationPanel"]
+layout_mode = 1
+anchors_preset = -1
+offset_top = -20.0
+offset_right = 233.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("21_6p7qo")
+theme_override_font_sizes/font_size = 14
+
+[node name="ImgPers2" type="TextureRect" parent="CombatController/DialogueController/ConversationPanel"]
+layout_mode = 0
+offset_left = 168.5
+offset_top = -62.0
+offset_right = 232.5
+offset_bottom = 2.0
+
+[node name="Name2" type="Label" parent="CombatController/DialogueController/ConversationPanel"]
+layout_mode = 1
+anchors_preset = -1
+offset_top = -20.0
+offset_right = 233.0
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("21_6p7qo")
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 2
 
 [node name="ActionMenuController" type="Node" parent="CombatController" node_paths=PackedStringArray("panel", "entry_vbox")]
 script = ExtResource("7_g812j")
@@ -87,6 +209,7 @@ entry_vbox = NodePath("ActionMenuPanel/VBox")
 entry_prefab = ExtResource("15_b1eki")
 
 [node name="ActionMenuPanel" type="PanelContainer" parent="CombatController/ActionMenuController" node_paths=PackedStringArray("vbox")]
+visible = false
 offset_left = 64.0
 offset_top = 9.0
 offset_right = 94.0
@@ -101,6 +224,25 @@ theme_override_constants/separation = 1
 alignment = 1
 
 [node name="Board" parent="CombatController" instance=ExtResource("4_25f7f")]
+
+[node name="Personagens" type="Node2D" parent="CombatController"]
+
+[node name="Personagem" parent="CombatController/Personagens" instance=ExtResource("2_h2ffh")]
+carimbo = SubResource("Resource_l281v")
+
+[node name="Personagem2" parent="CombatController/Personagens" instance=ExtResource("2_h2ffh")]
+modulate = Color(1, 0.51025575, 0.44386888, 1)
+position = Vector2(0, 48)
+carimbo = SubResource("Resource_fss22")
+inimigo = true
+
+[node name="Personagem3" parent="CombatController/Personagens" instance=ExtResource("2_h2ffh")]
+position = Vector2(0, 115)
+carimbo = SubResource("Resource_lce2y")
+
+[node name="Personagem4" parent="CombatController/Personagens" instance=ExtResource("2_h2ffh")]
+position = Vector2(32, 51)
+carimbo = SubResource("Resource_omttw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(192, 128)

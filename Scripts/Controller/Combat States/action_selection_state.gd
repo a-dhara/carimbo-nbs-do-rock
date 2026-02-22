@@ -10,6 +10,9 @@ extends CombatState
 func Enter() -> void:
 	super()
 	SelectTile(current_char.pos_grid)
+	if (current_char.turno.ja_agiu or ((current_char.carimbo_carr) and _owner.board.GetAttackableCells(current_char).size() == 0)) and (current_char.turno.ja_moveu):
+		_owner.state_machine.ChangeState(select_unit_state)
+		return
 	await LoadMenu()
 
 

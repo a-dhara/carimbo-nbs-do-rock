@@ -3,7 +3,7 @@ class_name CombatController
 
 @export var board: Board
 @export var input_controller: InputController
-@export var conversation_controller: Node
+@export var conversation_controller: ConversationController
 @export var action_menu_controller: ActionMenuController
 @export var state_machine: StateMachine
 @export var start_state: State

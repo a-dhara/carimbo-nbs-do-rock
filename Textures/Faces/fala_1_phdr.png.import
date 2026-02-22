@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://673htpu0acgy"
-path="res://.godot/imported/face_placeholder.png-0fcef7e47fe6882b0c63b6ce6b9e4d2b.ctex"
+uid="uid://diylkrw6h6k30"
+path="res://.godot/imported/fala_1_phdr.png-90b223bcb42065f395e94800c918b16e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/face_placeholder.png"
-dest_files=["res://.godot/imported/face_placeholder.png-0fcef7e47fe6882b0c63b6ce6b9e4d2b.ctex"]
+source_file="res://Textures/Faces/fala_1_phdr.png"
+dest_files=["res://.godot/imported/fala_1_phdr.png-90b223bcb42065f395e94800c918b16e.ctex"]
 
 [params]
 
