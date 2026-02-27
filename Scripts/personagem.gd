@@ -99,4 +99,4 @@ func _ready() -> void:
 	turno.Reinicia()
 	Place(grid.calcula_coord_grid(global_position))
 	Ajeita()
-	if carimbo.tipo == carimbo.Tipos.AUTOM: carimbo_carr = true
+	if carimbo.tipo == carimbo.Tipos.AUTOMATICO: carimbo_carr = true

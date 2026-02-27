@@ -5,8 +5,10 @@ const DIRECTIONS = [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]
 
 #region Referências
 @export var grid: Grid
-@export var tile_map: TileMapLayer
+@export var collision_map: TileMapLayer
+@export var ink_map: TileMapLayer
 @export var cell_overlay: TileMapLayer
+@export var base: Sprite2D
 #endregion
 
 @export var tile_selection_texture: Texture2D
@@ -22,6 +24,9 @@ var conteudo: Dictionary:
 
 
 func _ready() -> void:
+	for c in collision_map.get_used_cells():
+		conteudo[c] = Node.new()
+	
 	marker = Sprite2D.new()
 	marker.texture = tile_selection_texture
 	add_child(marker)
@@ -37,7 +42,7 @@ func GetTileContent(p: Vector2i) -> Node:
 
 #region FloodFill e busca de células caminháveis
 
-func _FloodFill(cell: Vector2i, dist_max: int, w_or_a: bool) -> Array[Vector2i]:
+func _FloodFill(cell: Vector2i, dist_max: int, tipo: String) -> Array[Vector2i]:
 	var array: Array[Vector2i] = []
 	var stack: Array[Vector2i] = [cell]
 	var out_a: Array[Vector2i] = []
@@ -56,26 +61,42 @@ func _FloodFill(cell: Vector2i, dist_max: int, w_or_a: bool) -> Array[Vector2i]:
 			continue
 		
 		array.append(curr)
-		if not w_or_a and GetTileContent(curr) is Personagem and GetTileContent(curr).inimigo:
+		if tipo == "atk" and GetTileContent(curr) is Personagem:
 			out_a.append(curr)
 		for dir in DIRECTIONS:
 			var coords: Vector2i = curr + dir
-			if w_or_a and GetTileContent(coords) != null:
+			if tipo == "wlk" and GetTileContent(coords) != null:
 				continue
 			if coords in array:
 				continue
 			if coords in stack:
 				continue
 			stack.append(coords)
-	if not w_or_a:
+	if tipo == "atk":
 		return out_a
 	return array
 
 func GetWalkableCells(pers: Personagem) -> Array[Vector2i]:
-	return _FloodFill(pers.pos_grid, pers.dist, true)
+	return _FloodFill(pers.pos_grid, pers.dist, "wlk")
 
 func GetAttackableCells(pers: Personagem) -> Array[Vector2i]:
-	return _FloodFill(pers.pos_grid, pers.carimbo.dist, false)
+	var cells: Array[Vector2i] =_FloodFill(pers.pos_grid, pers.carimbo.dist, "atk")
+	var out: Array[Vector2i] = []
+	for c in cells:
+		# Um aliado busca atacar inimigos e um inimigo busca atacar aliados
+		if (not pers.inimigo and GetTileContent(c).inimigo) or (pers.inimigo and not GetTileContent(c).inimigo):
+			out.append(c)
+	return out
+
+func BombCell(bomb_pos: Vector2i, brange: int) -> Array[Personagem]:
+	var cells: Array[Vector2i] = _FloodFill(bomb_pos, brange, "bmb")
+	var out: Array[Personagem] = []
+	for c in cells:
+		ink_map.set_cell(c, 0, Vector2i(0,0))
+		#if GetTileContent(p).inimigo:
+		if GetTileContent(c) is Personagem:
+			out.append(GetTileContent(c))
+	return out
 
 #endregion
 

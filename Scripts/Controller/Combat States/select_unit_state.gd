@@ -1,10 +1,17 @@
 extends CombatState
 
 @export var action_selection_state: State
+@export var enemy_state: State
 
 func Enter() -> void:
 	super()
 	_owner.current_char = null
+	var fim_turno: bool = true
+	for p in characters:
+		if (not p.turno.ja_agiu and ((not p.carimbo_carr) or _owner.board.GetAttackableCells(p).size() != 0)) or (not p.turno.ja_moveu):
+			fim_turno = false
+	if fim_turno:
+		_owner.state_machine.ChangeState(enemy_state)
 
 func OnMove(_e: Vector2i) -> void:
 	SelectTile(_e + _owner.board.pos)

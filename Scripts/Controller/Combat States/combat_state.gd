@@ -5,11 +5,18 @@ class_name CombatState
 var _owner: CombatController
 var action_menu_controller: ActionMenuController:
 	get: return _owner.action_menu_controller
+var info_menu_controller: InfoMenuController:
+	get: return _owner.info_menu_controller
 var current_char: Personagem:
 	get: return _owner.current_char
 	set(value): _owner.current_char = value
-#var personagens: Array[Personagem]:
-	#get: return _owner.personagens
+var current_en: Personagem:
+	get: return _owner.curr_enemy
+	set(value): _owner.curr_enemy = value
+var characters: Array[Personagem]:
+	get: return _owner.characters
+var enemies: Array[Personagem]:
+	get: return _owner.enemies
 #endregion
 
 func _ready() -> void:
@@ -22,6 +29,7 @@ func AddSignals() -> void:
 	_owner.input_controller.press_event.connect(OnPress)
 	_owner.input_controller.quit_event.connect(OnQuit)
 	_owner.input_controller.mouse_motion.connect(OnMouseMotion)
+	_owner.input_controller.info_event.connect(OnInfo)
 
 ## Desconecta os sinais do input controller
 func RemoveSignals() -> void:
@@ -29,6 +37,7 @@ func RemoveSignals() -> void:
 	_owner.input_controller.press_event.disconnect(OnPress)
 	_owner.input_controller.quit_event.disconnect(OnQuit)
 	_owner.input_controller.mouse_motion.disconnect(OnMouseMotion)
+	_owner.input_controller.info_event.disconnect(OnInfo)
 #endregion
 
 # Seleciona um tile específico do grid
@@ -56,4 +65,8 @@ func OnQuit() -> void:
 # Deve decidir o que fazer com o input de movimento do mouse
 func OnMouseMotion(_e: Vector2) -> void:
 	pass
+
+func OnInfo() -> void:
+	pass
+
 #endregion

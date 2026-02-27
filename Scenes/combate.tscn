@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cdp6csle1j3lm"]
+[gd_scene load_steps=43 format=3 uid="uid://cdp6csle1j3lm"]
 
 [ext_resource type="Script" uid="uid://csen6jgssgagt" path="res://Scripts/Controller/input_controller.gd" id="1_cbf7q"]
 [ext_resource type="Script" uid="uid://c8urpj3ab8e2k" path="res://Scripts/Common/State Machine/state_machine.gd" id="1_kmyeg"]
@@ -22,11 +22,17 @@
 [ext_resource type="PackedScene" uid="uid://dy4y0dp6gtipy" path="res://Prefabs/menu_entry.tscn" id="15_b1eki"]
 [ext_resource type="Script" uid="uid://ftaybp273t4i" path="res://Scripts/Controller/Combat States/attack_selection_state.gd.gd" id="15_vwed7"]
 [ext_resource type="Script" uid="uid://d014tbsjg08ot" path="res://Scripts/Controller/Combat States/minigame_state.gd" id="16_wscom"]
+[ext_resource type="Script" uid="uid://l4w138h56mv5" path="res://Scripts/Controller/Combat States/enemy_state.gd" id="19_dbuqd"]
 [ext_resource type="Script" uid="uid://cn70yrfy17vof" path="res://Scripts/Common/UI/conversation_panel.gd" id="19_ou37v"]
 [ext_resource type="Script" uid="uid://db80vididg1" path="res://Scripts/Controller/conversation_controller.gd" id="19_tb1mv"]
+[ext_resource type="Script" uid="uid://u60220v2ne6i" path="res://Scripts/Controller/Combat States/roundup_state.gd" id="20_cviu5"]
 [ext_resource type="FontFile" uid="uid://bf3ra4xupxlyw" path="res://Textures/pixelart.ttf" id="21_6p7qo"]
 [ext_resource type="PackedScene" uid="uid://dgn5tgosbaxrk" path="res://Scenes/mini_game_marmota.tscn" id="21_wscom"]
+[ext_resource type="Script" uid="uid://bx3r0uhc18v20" path="res://Scripts/Controller/info_menu_controller.gd" id="26_fss22"]
+[ext_resource type="Texture2D" uid="uid://bmm0ckn0p5fvd" path="res://Textures/Carimbos/carimbo-normal.png" id="26_l281v"]
+[ext_resource type="Script" uid="uid://cbl7shgryopyy" path="res://Scripts/Common/UI/info_menu_panel.gd" id="27_lce2y"]
 [ext_resource type="Script" uid="uid://co7s5lm0yyc3u" path="res://Scripts/carimbo.gd" id="27_pv8qf"]
+[ext_resource type="AudioStream" uid="uid://dfplyfjokvsrb" path="res://Textures/Musicas/musica_vibesV2.mp3" id="29_omttw"]
 
 [sub_resource type="Gradient" id="Gradient_ou37v"]
 offsets = PackedFloat32Array(0.37333333)
@@ -49,6 +55,18 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b1eki"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l281v"]
+bg_color = Color(0.21960784, 0.21960784, 0.21960784, 0.6666667)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [sub_resource type="Resource" id="Resource_l281v"]
 script = ExtResource("27_pv8qf")
 tipo = 2
@@ -60,7 +78,8 @@ metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
 
 [sub_resource type="Resource" id="Resource_lce2y"]
 script = ExtResource("27_pv8qf")
-tipo = 3
+tipo = 5
+carregado = true
 metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
 
 [sub_resource type="Resource" id="Resource_omttw"]
@@ -69,12 +88,13 @@ metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
 
 [node name="Combate" type="Node2D"]
 
-[node name="CombatController" type="Node2D" parent="." node_paths=PackedStringArray("board", "input_controller", "conversation_controller", "action_menu_controller", "state_machine", "start_state")]
+[node name="CombatController" type="Node2D" parent="." node_paths=PackedStringArray("board", "input_controller", "conversation_controller", "action_menu_controller", "info_menu_controller", "state_machine", "start_state")]
 script = ExtResource("1_vq3xa")
 board = NodePath("Board")
 input_controller = NodePath("InputController")
 conversation_controller = NodePath("DialogueController")
 action_menu_controller = NodePath("ActionMenuController")
+info_menu_controller = NodePath("InfoMenuController")
 state_machine = NodePath("StateMachine")
 start_state = NodePath("StateMachine/InitCombatState")
 pers_prefab = ExtResource("2_h2ffh")
@@ -82,17 +102,19 @@ pers_prefab = ExtResource("2_h2ffh")
 [node name="StateMachine" type="Node" parent="CombatController"]
 script = ExtResource("1_kmyeg")
 
-[node name="InitCombatState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("dialogue_state")]
+[node name="InitCombatState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("dialogue_state", "tst_ps")]
 script = ExtResource("3_ajawo")
 dialogue_state = NodePath("../DialogueState")
+tst_ps = [NodePath("../../Personagens/Personagem"), null, NodePath("../../Personagens/Personagem3"), NodePath("../../Personagens/Personagem4")]
 
 [node name="DialogueState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("select_unit_state")]
 script = ExtResource("5_pv8qf")
 select_unit_state = NodePath("../SelectUnitState")
 
-[node name="SelectUnitState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("action_selection_state")]
+[node name="SelectUnitState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("action_selection_state", "enemy_state")]
 script = ExtResource("4_ajawo")
 action_selection_state = NodePath("../ActionSelectionState")
+enemy_state = NodePath("../EnemyState")
 
 [node name="ActionSelectionState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("move_selection_state", "attack_selection_state", "select_unit_state")]
 script = ExtResource("6_jn6a6")
@@ -116,10 +138,19 @@ action_selection_state = NodePath("../ActionSelectionState")
 select_unit_state = NodePath("../SelectUnitState")
 mini_game_state = NodePath("../MiniGameState")
 
-[node name="MiniGameState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("action_selection_state")]
+[node name="MiniGameState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("action_selection_state", "select_unit_state")]
 script = ExtResource("16_wscom")
 action_selection_state = NodePath("../ActionSelectionState")
+select_unit_state = NodePath("../SelectUnitState")
 mini_game_marmota = ExtResource("21_wscom")
+
+[node name="EnemyState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("roundup_state")]
+script = ExtResource("19_dbuqd")
+roundup_state = NodePath("../RoundUpState")
+
+[node name="RoundUpState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("select_unit_state")]
+script = ExtResource("20_cviu5")
+select_unit_state = NodePath("../SelectUnitState")
 
 [node name="InputController" type="Node" parent="CombatController"]
 script = ExtResource("1_cbf7q")
@@ -223,25 +254,96 @@ layout_mode = 2
 theme_override_constants/separation = 1
 alignment = 1
 
+[node name="InfoMenuController" type="Node" parent="CombatController" node_paths=PackedStringArray("input_controller", "panel", "label_nome_pers", "label_nome_carimbo", "tex_carimbo", "label_descr_carimbo")]
+script = ExtResource("26_fss22")
+input_controller = NodePath("../InputController")
+panel = NodePath("InfoMenuPanel")
+label_nome_pers = NodePath("InfoMenuPanel/VBoxCont/NomePers")
+label_nome_carimbo = NodePath("InfoMenuPanel/VBoxCont/NomeCarimbo")
+tex_carimbo = NodePath("InfoMenuPanel/VBoxCont/TexCarimbo")
+label_descr_carimbo = NodePath("InfoMenuPanel/VBoxCont/DescricaoCarimbo")
+
+[node name="InfoMenuPanel" type="Panel" parent="CombatController/InfoMenuController"]
+visible = false
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -67.0
+offset_right = 99.0
+offset_bottom = 69.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l281v")
+script = ExtResource("27_lce2y")
+
+[node name="VBoxCont" type="VBoxContainer" parent="CombatController/InfoMenuController/InfoMenuPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 43.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="NomePers" type="Label" parent="CombatController/InfoMenuController/InfoMenuPanel/VBoxCont"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("21_6p7qo")
+theme_override_font_sizes/font_size = 8
+text = "NOME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NomeCarimbo" type="Label" parent="CombatController/InfoMenuController/InfoMenuPanel/VBoxCont"]
+custom_minimum_size = Vector2(85, 20)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("21_6p7qo")
+theme_override_font_sizes/font_size = 8
+text = "usa um carimbo do tipo TIPO:"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="TexCarimbo" type="TextureRect" parent="CombatController/InfoMenuController/InfoMenuPanel/VBoxCont"]
+layout_mode = 2
+texture = ExtResource("26_l281v")
+stretch_mode = 5
+
+[node name="DescricaoCarimbo" type="Label" parent="CombatController/InfoMenuController/InfoMenuPanel/VBoxCont"]
+custom_minimum_size = Vector2(85, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("21_6p7qo")
+theme_override_font_sizes/font_size = 8
+text = "Descricao do carimbo sendo bem descrito aqui"
+autowrap_mode = 2
+
+[node name="Music" type="AudioStreamPlayer" parent="CombatController"]
+stream = ExtResource("29_omttw")
+volume_db = -15.2
+autoplay = true
+parameters/looping = true
+
 [node name="Board" parent="CombatController" instance=ExtResource("4_25f7f")]
 
 [node name="Personagens" type="Node2D" parent="CombatController"]
 
 [node name="Personagem" parent="CombatController/Personagens" instance=ExtResource("2_h2ffh")]
+position = Vector2(16, 25)
 carimbo = SubResource("Resource_l281v")
 
 [node name="Personagem2" parent="CombatController/Personagens" instance=ExtResource("2_h2ffh")]
 modulate = Color(1, 0.51025575, 0.44386888, 1)
-position = Vector2(0, 48)
+position = Vector2(16, 73)
 carimbo = SubResource("Resource_fss22")
 inimigo = true
 
 [node name="Personagem3" parent="CombatController/Personagens" instance=ExtResource("2_h2ffh")]
-position = Vector2(0, 115)
+position = Vector2(16, 140)
 carimbo = SubResource("Resource_lce2y")
 
 [node name="Personagem4" parent="CombatController/Personagens" instance=ExtResource("2_h2ffh")]
-position = Vector2(32, 51)
+position = Vector2(48, 76)
 carimbo = SubResource("Resource_omttw")
 
 [node name="Camera2D" type="Camera2D" parent="."]

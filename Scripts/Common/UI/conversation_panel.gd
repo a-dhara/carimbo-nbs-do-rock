@@ -10,7 +10,7 @@ signal finished
 @export var img_r: TextureRect
 
 var _parent: ConversationController
-var _show_speed: float = 20.0
+var _show_speed: float = 40.0
 
 func _ready() -> void:
 	_parent = get_parent()

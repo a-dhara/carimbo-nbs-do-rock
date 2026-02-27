@@ -1,6 +1,7 @@
 extends CombatState
 
 @export var dialogue_state: State
+@export var tst_ps: Array[Personagem]
 
 func Enter() -> void:
 	super()
@@ -9,7 +10,7 @@ func Enter() -> void:
 
 func Init() -> void:
 	# carrega o mapa (?)
-	#SpawnTestUnits()
+	InitTest()
 	
 	_owner.state_machine.ChangeState(dialogue_state)
 
@@ -18,7 +19,7 @@ func SpawnTestUnits() -> void:
 		var pers: Personagem = _owner.pers_prefab.instantiate()
 		pers.carimbo = Carimbo.new()
 		if i == 0:
-			pers.carimbo.tipo = pers.carimbo.Tipos.DIST
+			pers.carimbo.tipo = pers.carimbo.Tipos.DISTANCIA
 		_owner.add_child(pers)
 		var p: Vector2i = Vector2i(0,2*i)
 		if i == 0:
@@ -33,3 +34,11 @@ func SpawnTestUnits() -> void:
 	
 	
 	pass
+
+func InitTest() -> void:
+	for p in tst_ps:
+		if p:
+			if p.carimbo.tipo == p.carimbo.Tipos.BOMBA:
+				p.carimbo.prepara_bomba = 2
+			p.carimbo_carr = false
+	

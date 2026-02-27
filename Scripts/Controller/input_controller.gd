@@ -3,6 +3,7 @@ class_name InputController
 
 signal move_event(point: Vector2)
 signal press_event(button: bool)
+signal info_event()
 signal quit_event()
 signal mouse_motion(point: Vector2)
 
@@ -26,13 +27,16 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(buttons[1]):
 		press_event.emit(false)
 	
+	if Input.is_action_just_pressed("info"):
+		info_event.emit()
+	
 	# Sair
 	if Input.is_action_just_pressed("quit"):
 		quit_event.emit()
 	
 	# Movimento do mouse
 	var curr_mouse: Vector2 = get_viewport().get_mouse_position()
-	var mouse_offset: Vector2 = Vector2(-16,-16)
+	var mouse_offset: Vector2 = Vector2(-32,-32)
 	if _last_mouse != curr_mouse:
 		_last_mouse = curr_mouse
 		mouse_motion.emit(curr_mouse + mouse_offset)

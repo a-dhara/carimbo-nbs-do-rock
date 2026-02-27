@@ -3,9 +3,10 @@ class_name Carimbo
 
 enum Tipos {
 	NORMAL,
+	COMPLETO,
 	FOFO,
-	DIST,
-	AUTOM,
+	DISTANCIA,
+	AUTOMATICO,
 	BOMBA
 }
 
@@ -16,9 +17,7 @@ const dano: int = 1
 ## Distância de ataque do carimbo. Só é diferente de 1 para o carimbo à distância e pra bomba
 var dist: int:
 	get():
-		if tipo == Tipos.DIST:
-			return 3
-		if tipo == Tipos.BOMBA:
+		if tipo == Tipos.DISTANCIA or tipo == Tipos.BOMBA:
 			return 3
 		return 1
 
@@ -30,9 +29,9 @@ var area: int:
 		return 0
 
 ## Se o carimbo está ou não carregado
-var carregado: bool:
+@export var carregado: bool:
 	set(value):
-		if tipo == Tipos.AUTOM:
+		if tipo == Tipos.AUTOMATICO:
 			carregado = true
 		if tipo == Tipos.BOMBA: #é preciso carregar a bomba por um tempo
 			prepara_bomba += 1
@@ -44,11 +43,42 @@ var carregado: bool:
 
 var prepara_bomba: int = 0
 
-func Ataque(inim: Personagem) -> void:
-	inim.carimbadas += dano
+var _texs: Array[Texture2D] = [load("res://Textures/Carimbos/carimbo-normal.png"),
+load("res://Textures/Carimbos/carimbo-completo.png"), load("res://Textures/Carimbos/carimbo-fofo.png"),
+load("res://Textures/Carimbos/carimbo-distancia.png"), load("res://Textures/Carimbos/carimbo-automatico.png"),
+load("res://Textures/Carimbos/carimbo-bomba.png")]
 
-func Explosao() -> void:
-	pass
+var tex: Texture2D:
+	get():
+		return _texs[tipo]
 
-func Fofo() -> void:
-	pass
+var _descs: Array[String] = ["Carimbo comum! Dê carimbadas!", "Possui um escudo junto! Use-o para se defender!",
+"Fofinho! Atordoa os inimigos.", "Carimbo longo. Ataque à distância! 3 metros!", "Não precisa ser carregado!",
+"Arremesse em alguém e atinja também quem estiver por perto! Área fica suja"]
+
+var desc: String:
+	get():
+		return _descs[tipo]
+
+var _nomes: Array[String] = ["normal", "completo", "fofo", "distância", "automático", "bomba"]
+
+var nome: String:
+	get():
+		return _nomes[tipo]
+
+func Attack(en: Personagem) -> void:
+	match tipo:
+		Tipos.NORMAL, Tipos.COMPLETO, Tipos.DISTANCIA, Tipos.AUTOMATICO:
+			en.carimbadas += 1
+		Tipos.FOFO:
+			Fofo(en)
+		Tipos.BOMBA:
+			pass
+	carregado = false
+
+
+
+
+func Fofo(en: Personagem) -> void:
+	en.carimbadas +=1
+	en.atordoado = 1

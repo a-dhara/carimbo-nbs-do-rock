@@ -5,5 +5,4 @@
 [resource]
 script = ExtResource("1_hy5dp")
 tamanho = Vector2i(12, 8)
-tam_cell = Vector2i(32, 32)
 metadata/_custom_type_script = "uid://db6o7oeskiu5q"

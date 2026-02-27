@@ -10,9 +10,6 @@ extends CombatState
 func Enter() -> void:
 	super()
 	SelectTile(current_char.pos_grid)
-	if (current_char.turno.ja_agiu or ((current_char.carimbo_carr) and _owner.board.GetAttackableCells(current_char).size() == 0)) and (current_char.turno.ja_moveu):
-		_owner.state_machine.ChangeState(select_unit_state)
-		return
 	await LoadMenu()
 
 
@@ -38,6 +35,12 @@ func OnMouseMotion(_e: Vector2) -> void:
 		return
 	action_menu_controller.SetSelection(ind)
 
+func OnInfo() -> void:
+	if not info_menu_controller.shown:
+		info_menu_controller.ShowMenu(current_char)
+	else:
+		info_menu_controller.HideMenu()
+
 #
 
 func LoadMenu() -> void:
@@ -49,6 +52,8 @@ func LoadMenu() -> void:
 
 func Cancel() -> void:
 	_owner.state_machine.ChangeState(select_unit_state)
+	if info_menu_controller.shown:
+		info_menu_controller.HideMenu()
 
 func Confirm() -> void:
 	match action_menu_controller.selection:
