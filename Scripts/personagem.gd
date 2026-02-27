@@ -2,7 +2,7 @@ extends Node2D
 class_name Personagem
 
 #region Referências
-@export var sprite: Sprite2D
+@export var sprite: AnimatedSprite2D
 @export var selected_sprite: Sprite2D
 @export var tinta_sprite: Sprite2D
 @export var carr_tinta_label: Label
@@ -38,12 +38,24 @@ var veloc_mov: float = 4.0: # velocidade de movimento, afetada pela lentidão
 #endregion
 
 #region Variáveis do personagem
-@export var lento: int = 0
-@export var atordoado: int = 0
+@export var lento: int = 0:
+	set(value):
+		if value > 0: default_anim = "pos_bomba"
+		lento = value
+@export var atordoado: int = 0:
+	set(value):
+		if value > 0: default_anim = "atordoado"
+		atordoado = value
 @export var carimbadas: int = 0:
 	set(value):
 		carimbadas = value
 		carimbos_sprite.texture = tex_carimbos[value]
+		if carimbadas == 2:
+			default_anim = "2_carimb"
+		if carimbadas == 3:
+			sprite.animation = "3_carimb"
+			await sprite.animation_finished
+			default_anim = "caido"
 var selected: bool = false:
 	set(value):
 		selected = value
@@ -63,6 +75,12 @@ var carimbo_carr: bool:
 		return carimbo.carregado
 var pos_grid: Vector2i # Posição no grid
 var tiles_caminho: PackedVector2Array = []
+
+var default_anim: String = "default":
+	set(value):
+		default_anim = value
+		sprite.animation = value
+
 #endregion
 
 #region Funções de ajuste
@@ -82,14 +100,21 @@ func Ajeita() -> void:
 #endregion
 
 func Caminhar(final: Vector2i) -> void:
+	sprite.animation = "andando"
 	Place(final)
 	for t in tiles_caminho:
+		var dir: Vector2i = Vector2i(t) - pos_grid
+		if dir.x < 0:
+			sprite.flip_h = true
+		if dir.x > 0:
+			sprite.flip_h = false
 		var tween: Tween = create_tween()
 		tween.tween_property(
 			self, "position", grid.calcula_pos_mapa(Vector2i(t)), 1.0/veloc_mov
-		).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		).set_trans(Tween.TRANS_CUBIC)
 		
 		await tween.finished
+	sprite.animation = "default"
 
 
 
