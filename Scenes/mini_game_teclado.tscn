@@ -1,0 +1,288 @@
+[gd_scene load_steps=12 format=3 uid="uid://dbsmss6o3ibey"]
+
+[ext_resource type="Script" uid="uid://byc5y3w6t38ow" path="res://Scripts/Common/MiniGames/minigame_teclado.gd" id="1_cma5b"]
+[ext_resource type="Texture2D" uid="uid://ceb3835k4abr6" path="res://Textures/MiniGames/min-a_fundo.png" id="2_g1qqj"]
+[ext_resource type="PackedScene" uid="uid://1s304y7c3t8p" path="res://Prefabs/marmota_teclado.tscn" id="2_yck8b"]
+[ext_resource type="Texture2D" uid="uid://bgv7f2uuy53ad" path="res://Textures/MiniGames/min-a_casinhas.png" id="3_yck8b"]
+[ext_resource type="Texture2D" uid="uid://54ya33s3gsya" path="res://Textures/MiniGames/min-a_carimbo.png" id="4_kadva"]
+[ext_resource type="FontFile" uid="uid://bf3ra4xupxlyw" path="res://Textures/pixelart.ttf" id="5_rrlo6"]
+[ext_resource type="Texture2D" uid="uid://dnjqn1oy14hgt" path="res://Textures/marker-test.png" id="6_g1qqj"]
+
+[sub_resource type="Gradient" id="Gradient_r4fi2"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_in0f6"]
+gradient = SubResource("Gradient_r4fi2")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_in0f6"]
+bg_color = Color(0.6, 0.6, 0.6, 0.34901962)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m8t3f"]
+bg_color = Color(0, 0, 0, 0.5294118)
+
+[node name="MiniGameTeclado" type="Node2D" node_paths=PackedStringArray("parent_marmotas", "label", "label_pont", "label_tempo", "label_final", "carimbo", "timer", "markers", "marker")]
+script = ExtResource("1_cma5b")
+marmota_prefab = ExtResource("2_yck8b")
+parent_marmotas = NodePath("Fundo/Marmotas")
+label = NodePath("TempoIni")
+label_pont = NodePath("Pontuação")
+label_tempo = NodePath("TempoJogo")
+label_final = NodePath("Final")
+carimbo = NodePath("Carimbo")
+timer = NodePath("Timer")
+markers = [NodePath("Fundo/Marker2D"), NodePath("Fundo/Marker2D2"), NodePath("Fundo/Marker2D3"), NodePath("Fundo/Marker2D4"), NodePath("Fundo/Marker2D5"), NodePath("Fundo/Marker2D6"), NodePath("Fundo/Marker2D7"), NodePath("Fundo/Marker2D8"), NodePath("Fundo/Marker2D9")]
+marker = NodePath("Marker")
+
+[node name="Fundo" type="Node2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Fundo"]
+offset_left = -61.0
+offset_top = -48.0
+offset_right = 482.0
+offset_bottom = 346.0
+texture = SubResource("GradientTexture1D_in0f6")
+
+[node name="FundoMinigame" type="Sprite2D" parent="Fundo"]
+position = Vector2(188, 146)
+texture = ExtResource("2_g1qqj")
+
+[node name="Marmotas" type="Node2D" parent="Fundo"]
+
+[node name="Casinhas" type="Sprite2D" parent="Fundo"]
+position = Vector2(188, 146)
+texture = ExtResource("3_yck8b")
+
+[node name="Marker2D" type="Marker2D" parent="Fundo"]
+position = Vector2(134, 81)
+
+[node name="q" type="Label" parent="Fundo/Marker2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_rrlo6")
+text = "Q"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Marker2D2" type="Marker2D" parent="Fundo"]
+position = Vector2(189, 81)
+
+[node name="w" type="Label" parent="Fundo/Marker2D2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_rrlo6")
+text = "W"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Marker2D3" type="Marker2D" parent="Fundo"]
+position = Vector2(245, 81)
+
+[node name="e" type="Label" parent="Fundo/Marker2D3"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_rrlo6")
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Marker2D4" type="Marker2D" parent="Fundo"]
+position = Vector2(134, 134)
+
+[node name="a" type="Label" parent="Fundo/Marker2D4"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_rrlo6")
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Marker2D5" type="Marker2D" parent="Fundo"]
+position = Vector2(189, 134)
+
+[node name="s" type="Label" parent="Fundo/Marker2D5"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_rrlo6")
+text = "S"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Marker2D6" type="Marker2D" parent="Fundo"]
+position = Vector2(245, 134)
+
+[node name="d" type="Label" parent="Fundo/Marker2D6"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_rrlo6")
+text = "D"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Marker2D7" type="Marker2D" parent="Fundo"]
+position = Vector2(134, 188)
+
+[node name="z" type="Label" parent="Fundo/Marker2D7"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_rrlo6")
+text = "Z"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Marker2D8" type="Marker2D" parent="Fundo"]
+position = Vector2(189, 188)
+
+[node name="x" type="Label" parent="Fundo/Marker2D8"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_rrlo6")
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Marker2D9" type="Marker2D" parent="Fundo"]
+position = Vector2(245, 188)
+
+[node name="c" type="Label" parent="Fundo/Marker2D9"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_rrlo6")
+text = "C"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Carimbo" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_kadva")
+
+[node name="Pontuação" type="Label" parent="."]
+offset_left = 82.0
+offset_top = 37.0
+offset_right = 142.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("5_rrlo6")
+theme_override_font_sizes/font_size = 8
+text = "score: 0"
+
+[node name="TempoIni" type="Label" parent="."]
+offset_left = 118.0
+offset_top = 52.0
+offset_right = 261.0
+offset_bottom = 213.75409
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_in0f6")
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TempoJogo" type="Label" parent="."]
+offset_left = 182.0
+offset_top = 37.0
+offset_right = 346.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("5_rrlo6")
+theme_override_font_sizes/font_size = 8
+text = "tempo restante:"
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Final" type="Label" parent="."]
+visible = false
+offset_left = 105.0
+offset_top = 80.0
+offset_right = 278.0
+offset_bottom = 167.0
+theme_override_fonts/font = ExtResource("5_rrlo6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_m8t3f")
+text = "Acabou!!
+Pontuação final: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Marker" type="Sprite2D" parent="."]
+texture = ExtResource("6_g1qqj")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

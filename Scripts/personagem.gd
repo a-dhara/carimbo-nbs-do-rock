@@ -7,7 +7,7 @@ class_name Personagem
 @export var tinta_sprite: Sprite2D
 @export var carr_tinta_label: Label
 @export var carimbos_sprite: Sprite2D
-@export var animation_player: AnimationPlayer
+@export var avisos: VBoxContainer
 @export var grid: Grid
 @export var carimbo: Carimbo # Carimbo que personagem está usando
 @export var turno: Turn
@@ -44,7 +44,7 @@ var veloc_mov: float = 4.0: # velocidade de movimento, afetada pela lentidão
 		lento = value
 @export var atordoado: int = 0:
 	set(value):
-		if value > 0: default_anim = "atordoado"
+		if value > 0: sprite.animation = "atordoado"
 		atordoado = value
 @export var carimbadas: int = 0:
 	set(value):
@@ -56,18 +56,24 @@ var veloc_mov: float = 4.0: # velocidade de movimento, afetada pela lentidão
 			sprite.animation = "3_carimb"
 			await sprite.animation_finished
 			default_anim = "caido"
+			modulate = Color(0.307, 0.307, 0.307, 1.0)
 var selected: bool = false:
 	set(value):
 		selected = value
 		selected_sprite.visible = selected
 		if not carimbo_carr: carr_tinta_label.visible = selected
-
 ## Se o carimbo está ou não carregado, retorna/atualiza o valor que está dentro da variável carimbo
 var carimbo_carr: bool:
 	set(value):
 		carimbo.carregado = value
 		if value:
-			tinta_sprite.texture = tex_tintas[1]
+			Aviso("carregando")
+			if carimbo.tipo == carimbo.Tipos.BOMBA:
+				Aviso("bomba: " + str(carimbo.prepara_bomba) + "/3")
+				if carimbo.prepara_bomba == 3:
+					tinta_sprite.texture = tex_tintas[1]
+			else:
+				tinta_sprite.texture = tex_tintas[1]
 			carr_tinta_label.visible = false
 		else:
 			tinta_sprite.texture = tex_tintas[0]
@@ -101,6 +107,7 @@ func Ajeita() -> void:
 
 func Caminhar(final: Vector2i) -> void:
 	sprite.animation = "andando"
+	Aviso("andando")
 	Place(final)
 	for t in tiles_caminho:
 		var dir: Vector2i = Vector2i(t) - pos_grid
@@ -114,8 +121,7 @@ func Caminhar(final: Vector2i) -> void:
 		).set_trans(Tween.TRANS_CUBIC)
 		
 		await tween.finished
-	sprite.animation = "default"
-
+	sprite.animation = default_anim
 
 
 func _ready() -> void:
@@ -125,3 +131,15 @@ func _ready() -> void:
 	Place(grid.calcula_coord_grid(global_position))
 	Ajeita()
 	if carimbo.tipo == carimbo.Tipos.AUTOMATICO: carimbo_carr = true
+
+func Aviso(txt: String) -> void:
+	var label: Label = Label.new()
+	var ls: LabelSettings = LabelSettings.new()
+	ls.font = load("res://Textures/pixelart.ttf")
+	ls.font_size = 8
+	label.label_settings = ls
+	label.text = txt
+	avisos.add_child(label)
+	label.visible = true
+	await get_tree().create_timer(2.0).timeout
+	label.visible = false

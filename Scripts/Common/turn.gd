@@ -17,6 +17,17 @@ func Reinicia() -> void:
 	ja_agiu = false
 	trava_mov = false
 	pos_ini = _actor.pos_grid
+	if _actor.atordoado > 0:
+		_actor.atordoado -= 1
+		ja_moveu = true
+		ja_agiu = true
+		_actor.sprite.animation =  _actor.default_anim
+	if _actor.lento > 0:
+		_actor.lento -= 1
+	if _actor.carimbadas == 3:
+		ja_moveu = true
+		ja_agiu = true
+
 
 func DesfazMov() -> void:
 	ja_moveu = false

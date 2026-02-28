@@ -1,0 +1,119 @@
+[gd_scene load_steps=10 format=3 uid="uid://dgn5tgosbaxrk"]
+
+[ext_resource type="Script" uid="uid://8nmupeadmf33" path="res://Scripts/Common/MiniGames/minigame_mouse.gd" id="1_4r5ig"]
+[ext_resource type="Texture2D" uid="uid://ceb3835k4abr6" path="res://Textures/MiniGames/min-a_fundo.png" id="1_w86fb"]
+[ext_resource type="Texture2D" uid="uid://bgv7f2uuy53ad" path="res://Textures/MiniGames/min-a_casinhas.png" id="2_m8lm6"]
+[ext_resource type="Texture2D" uid="uid://54ya33s3gsya" path="res://Textures/MiniGames/min-a_carimbo.png" id="3_m8lm6"]
+[ext_resource type="FontFile" uid="uid://bf3ra4xupxlyw" path="res://Textures/pixelart.ttf" id="6_m8t3f"]
+
+[sub_resource type="Gradient" id="Gradient_r4fi2"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_in0f6"]
+gradient = SubResource("Gradient_r4fi2")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_in0f6"]
+bg_color = Color(0.6, 0.6, 0.6, 0.34901962)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m8t3f"]
+bg_color = Color(0, 0, 0, 0.5294118)
+
+[node name="MiniGameMouse" type="Node2D"]
+script = ExtResource("1_4r5ig")
+
+[node name="Fundo" type="Node2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Fundo"]
+offset_left = -61.0
+offset_top = -48.0
+offset_right = 482.0
+offset_bottom = 346.0
+texture = SubResource("GradientTexture1D_in0f6")
+
+[node name="FundoMinigame" type="Sprite2D" parent="Fundo"]
+position = Vector2(188, 146)
+texture = ExtResource("1_w86fb")
+
+[node name="Marker2D" type="Marker2D" parent="Fundo"]
+position = Vector2(134, 81)
+
+[node name="Marker2D2" type="Marker2D" parent="Fundo"]
+position = Vector2(189, 81)
+
+[node name="Marker2D3" type="Marker2D" parent="Fundo"]
+position = Vector2(245, 81)
+
+[node name="Marker2D4" type="Marker2D" parent="Fundo"]
+position = Vector2(134, 134)
+
+[node name="Marker2D5" type="Marker2D" parent="Fundo"]
+position = Vector2(189, 134)
+
+[node name="Marker2D6" type="Marker2D" parent="Fundo"]
+position = Vector2(245, 134)
+
+[node name="Marker2D7" type="Marker2D" parent="Fundo"]
+position = Vector2(134, 188)
+
+[node name="Marker2D8" type="Marker2D" parent="Fundo"]
+position = Vector2(189, 188)
+
+[node name="Marker2D9" type="Marker2D" parent="Fundo"]
+position = Vector2(245, 188)
+
+[node name="Marmotas" type="Node2D" parent="."]
+
+[node name="Casinhas" type="Sprite2D" parent="."]
+position = Vector2(188, 146)
+texture = ExtResource("2_m8lm6")
+
+[node name="Carimbo" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_m8lm6")
+
+[node name="Pontuação" type="Label" parent="."]
+offset_left = 82.0
+offset_top = 37.0
+offset_right = 142.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("6_m8t3f")
+theme_override_font_sizes/font_size = 8
+text = "score: 0"
+
+[node name="TempoIni" type="Label" parent="."]
+offset_left = 118.0
+offset_top = 52.0
+offset_right = 261.0
+offset_bottom = 213.75409
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_in0f6")
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TempoJogo" type="Label" parent="."]
+offset_left = 182.0
+offset_top = 37.0
+offset_right = 346.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("6_m8t3f")
+theme_override_font_sizes/font_size = 8
+text = "tempo restante:"
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Final" type="Label" parent="."]
+visible = false
+offset_left = 105.0
+offset_top = 80.0
+offset_right = 278.0
+offset_bottom = 167.0
+theme_override_fonts/font = ExtResource("6_m8t3f")
+theme_override_styles/normal = SubResource("StyleBoxFlat_m8t3f")
+text = "Acabou!!
+Pontuação final: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

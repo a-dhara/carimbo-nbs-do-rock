@@ -3,7 +3,6 @@ class_name Carimbo
 
 enum Tipos {
 	NORMAL,
-	COMPLETO,
 	FOFO,
 	DISTANCIA,
 	AUTOMATICO,
@@ -44,15 +43,14 @@ var area: int:
 var prepara_bomba: int = 0
 
 var _texs: Array[Texture2D] = [load("res://Textures/Carimbos/carimbo-normal.png"),
-load("res://Textures/Carimbos/carimbo-completo.png"), load("res://Textures/Carimbos/carimbo-fofo.png"),
-load("res://Textures/Carimbos/carimbo-distancia.png"), load("res://Textures/Carimbos/carimbo-automatico.png"),
-load("res://Textures/Carimbos/carimbo-bomba.png")]
+load("res://Textures/Carimbos/carimbo-fofo.png"), load("res://Textures/Carimbos/carimbo-distancia.png"),
+load("res://Textures/Carimbos/carimbo-automatico.png"), load("res://Textures/Carimbos/carimbo-bomba.png")]
 
 var tex: Texture2D:
 	get():
 		return _texs[tipo]
 
-var _descs: Array[String] = ["Carimbo comum! Dê carimbadas!", "Possui um escudo junto! Use-o para se defender!",
+var _descs: Array[String] = ["Carimbo comum! Dê carimbadas!",
 "Fofinho! Atordoa os inimigos.", "Carimbo longo. Ataque à distância! 3 metros!", "Não precisa ser carregado!",
 "Arremesse em alguém e atinja também quem estiver por perto! Área fica suja"]
 
@@ -60,7 +58,7 @@ var desc: String:
 	get():
 		return _descs[tipo]
 
-var _nomes: Array[String] = ["normal", "completo", "fofo", "distância", "automático", "bomba"]
+var _nomes: Array[String] = ["normal", "fofo", "distância", "automático", "bomba"]
 
 var nome: String:
 	get():
@@ -68,7 +66,7 @@ var nome: String:
 
 func Attack(en: Personagem) -> void:
 	match tipo:
-		Tipos.NORMAL, Tipos.COMPLETO, Tipos.DISTANCIA, Tipos.AUTOMATICO:
+		Tipos.NORMAL, Tipos.DISTANCIA, Tipos.AUTOMATICO:
 			en.carimbadas += 1
 		Tipos.FOFO:
 			Fofo(en)

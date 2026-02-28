@@ -85,7 +85,8 @@ func GetAttackableCells(pers: Personagem) -> Array[Vector2i]:
 	for c in cells:
 		# Um aliado busca atacar inimigos e um inimigo busca atacar aliados
 		if (not pers.inimigo and GetTileContent(c).inimigo) or (pers.inimigo and not GetTileContent(c).inimigo):
-			out.append(c)
+			if GetTileContent(c).carimbadas < 3:
+				out.append(c)
 	return out
 
 func BombCell(bomb_pos: Vector2i, brange: int) -> Array[Personagem]:

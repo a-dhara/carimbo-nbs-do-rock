@@ -15,6 +15,8 @@ func Enter() -> void:
 
 func Exit() -> void:
 	super()
+	if info_menu_controller.shown:
+		info_menu_controller.HideMenu()
 	await action_menu_controller.Hide()
 
 func OnPress(_e: bool) -> void:

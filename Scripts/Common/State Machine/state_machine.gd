@@ -3,6 +3,7 @@ class_name StateMachine
 
 
 var _curr_state: State
+var pause_state: State
 
 func ChangeState(new_state: State) -> void:
 	#if new_state == _curr_state:
@@ -14,3 +15,9 @@ func ChangeState(new_state: State) -> void:
 	_curr_state = new_state
 	if _curr_state:
 		_curr_state.Enter()
+
+func PauseState() -> void:
+	_curr_state.process_mode = Node.PROCESS_MODE_DISABLED
+	pause_state.Enter()
+	
+	

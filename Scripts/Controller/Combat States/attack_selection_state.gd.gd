@@ -22,7 +22,7 @@ func OnMove(_e: Vector2i) -> void:
 
 func OnPress(_e: bool) -> void:
 	if _e:
-		if tiles.has(_owner.current_tile):
+		if tiles.has(_owner.current_tile) and _owner.board.conteudo[_owner.current_tile].carimbadas < 3:
 			_owner.curr_enemy = _owner.board.conteudo[_owner.current_tile]
 			current_char.turno.ja_agiu = true
 			_owner.state_machine.ChangeState(mini_game_state)

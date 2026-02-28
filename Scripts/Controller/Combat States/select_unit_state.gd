@@ -5,6 +5,8 @@ extends CombatState
 
 func Enter() -> void:
 	super()
+	if FimJogoq():
+		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 	_owner.current_char = null
 	var fim_turno: bool = true
 	for p in characters:
@@ -32,3 +34,18 @@ func OnPress(_e: bool) -> void:
 			current_char = null
 	else:
 		current_char = null
+
+func FimJogoq() -> bool:
+	var out: bool = true
+	
+	for p in characters:
+		if p.carimbadas < 3:
+			out = false
+	
+	if not out:
+		out = true
+		for e in enemies:
+			if e.carimbadas < 3:
+				out = false
+	
+	return out

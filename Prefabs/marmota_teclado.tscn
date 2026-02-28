@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://1s304y7c3t8p"]
+
+[ext_resource type="Script" uid="uid://b7us6nl23cktg" path="res://Scripts/Common/MiniGames/marmota_teclado.gd" id="1_1aodu"]
+[ext_resource type="Texture2D" uid="uid://vgdkqb1jxjv3" path="res://Textures/MiniGames/min-a_carinhas.png" id="2_fklkx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_15ugk"]
+size = Vector2(26, 27)
+
+[node name="MarmotaTeclado" type="Area2D"]
+script = ExtResource("1_1aodu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_fklkx")
+
+[node name="ColShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_15ugk")
+disabled = true
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

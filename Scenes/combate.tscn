@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cdp6csle1j3lm"]
+[gd_scene load_steps=55 format=3 uid="uid://cdp6csle1j3lm"]
 
 [ext_resource type="Script" uid="uid://csen6jgssgagt" path="res://Scripts/Controller/input_controller.gd" id="1_cbf7q"]
 [ext_resource type="Script" uid="uid://c8urpj3ab8e2k" path="res://Scripts/Common/State Machine/state_machine.gd" id="1_kmyeg"]
@@ -27,12 +27,20 @@
 [ext_resource type="Script" uid="uid://db80vididg1" path="res://Scripts/Controller/conversation_controller.gd" id="19_tb1mv"]
 [ext_resource type="Script" uid="uid://u60220v2ne6i" path="res://Scripts/Controller/Combat States/roundup_state.gd" id="20_cviu5"]
 [ext_resource type="FontFile" uid="uid://bf3ra4xupxlyw" path="res://Textures/pixelart.ttf" id="21_6p7qo"]
-[ext_resource type="PackedScene" uid="uid://dgn5tgosbaxrk" path="res://Scenes/mini_game_marmota.tscn" id="21_wscom"]
+[ext_resource type="PackedScene" uid="uid://dgn5tgosbaxrk" path="res://Scenes/mini_game_mouse.tscn" id="21_wscom"]
 [ext_resource type="Script" uid="uid://bx3r0uhc18v20" path="res://Scripts/Controller/info_menu_controller.gd" id="26_fss22"]
 [ext_resource type="Texture2D" uid="uid://bmm0ckn0p5fvd" path="res://Textures/Carimbos/carimbo-normal.png" id="26_l281v"]
 [ext_resource type="Script" uid="uid://cbl7shgryopyy" path="res://Scripts/Common/UI/info_menu_panel.gd" id="27_lce2y"]
 [ext_resource type="Script" uid="uid://co7s5lm0yyc3u" path="res://Scripts/carimbo.gd" id="27_pv8qf"]
 [ext_resource type="AudioStream" uid="uid://dfplyfjokvsrb" path="res://Textures/Musicas/musica_vibesV2.mp3" id="29_omttw"]
+[ext_resource type="PackedScene" uid="uid://cyunqs62slj6i" path="res://Scenes/Personagens/bruna.tscn" id="33_keogs"]
+[ext_resource type="PackedScene" uid="uid://c2chw6ytknnui" path="res://Scenes/Personagens/jean.tscn" id="34_pmdni"]
+[ext_resource type="PackedScene" uid="uid://c1u541lx1u0vh" path="res://Scenes/Personagens/clara.tscn" id="35_pk1fs"]
+[ext_resource type="PackedScene" uid="uid://b304r2nnj1kh5" path="res://Scenes/Personagens/milena.tscn" id="36_mj43o"]
+[ext_resource type="PackedScene" uid="uid://svu53oap5a7k" path="res://Scenes/Personagens/cadu.tscn" id="37_ere2o"]
+[ext_resource type="PackedScene" uid="uid://cbwvaolanox2a" path="res://Scenes/Personagens/adhara.tscn" id="38_mpamd"]
+[ext_resource type="PackedScene" uid="uid://bekh5yqfayfbl" path="res://Scenes/Personagens/ana.tscn" id="39_n6jjv"]
+[ext_resource type="PackedScene" uid="uid://gssk82fk6hr6" path="res://Scenes/Personagens/julia.tscn" id="40_yrxmd"]
 
 [sub_resource type="Gradient" id="Gradient_ou37v"]
 offsets = PackedFloat32Array(0.37333333)
@@ -67,22 +75,37 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="Resource" id="Resource_l281v"]
+[sub_resource type="Resource" id="Resource_pmdni"]
+script = ExtResource("27_pv8qf")
+metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
+
+[sub_resource type="Resource" id="Resource_pk1fs"]
+script = ExtResource("27_pv8qf")
+metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
+
+[sub_resource type="Resource" id="Resource_mj43o"]
+script = ExtResource("27_pv8qf")
+metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
+
+[sub_resource type="Resource" id="Resource_ere2o"]
+script = ExtResource("27_pv8qf")
+tipo = 1
+metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
+
+[sub_resource type="Resource" id="Resource_mpamd"]
 script = ExtResource("27_pv8qf")
 tipo = 2
 metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
 
-[sub_resource type="Resource" id="Resource_fss22"]
+[sub_resource type="Resource" id="Resource_n6jjv"]
 script = ExtResource("27_pv8qf")
 metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
 
-[sub_resource type="Resource" id="Resource_lce2y"]
+[sub_resource type="Resource" id="Resource_yrxmd"]
 script = ExtResource("27_pv8qf")
-tipo = 5
-carregado = true
 metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
 
-[sub_resource type="Resource" id="Resource_omttw"]
+[sub_resource type="Resource" id="Resource_o3s8f"]
 script = ExtResource("27_pv8qf")
 metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
 
@@ -105,7 +128,7 @@ script = ExtResource("1_kmyeg")
 [node name="InitCombatState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("dialogue_state", "tst_ps")]
 script = ExtResource("3_ajawo")
 dialogue_state = NodePath("../DialogueState")
-tst_ps = [NodePath("../../Personagens/Personagem"), null, NodePath("../../Personagens/Personagem3"), NodePath("../../Personagens/Personagem4")]
+tst_ps = [null, null, null, null]
 
 [node name="DialogueState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("select_unit_state")]
 script = ExtResource("5_pv8qf")
@@ -151,6 +174,8 @@ roundup_state = NodePath("../RoundUpState")
 [node name="RoundUpState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("select_unit_state")]
 script = ExtResource("20_cviu5")
 select_unit_state = NodePath("../SelectUnitState")
+
+[node name="PauseState" type="Node" parent="CombatController/StateMachine"]
 
 [node name="InputController" type="Node" parent="CombatController"]
 script = ExtResource("1_cbf7q")
@@ -269,7 +294,7 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 5.0
-offset_top = -67.0
+offset_top = -99.0
 offset_right = 99.0
 offset_bottom = 69.0
 grow_vertical = 2
@@ -320,7 +345,7 @@ autowrap_mode = 2
 
 [node name="Music" type="AudioStreamPlayer" parent="CombatController"]
 stream = ExtResource("29_omttw")
-volume_db = -15.2
+volume_db = -6.24
 autoplay = true
 parameters/looping = true
 
@@ -328,23 +353,41 @@ parameters/looping = true
 
 [node name="Personagens" type="Node2D" parent="CombatController"]
 
-[node name="Personagem" parent="CombatController/Personagens" instance=ExtResource("2_h2ffh")]
-position = Vector2(16, 25)
-carimbo = SubResource("Resource_l281v")
+[node name="Bruna" parent="CombatController/Personagens" instance=ExtResource("33_keogs")]
+position = Vector2(15, 19)
+carimbo = SubResource("Resource_pmdni")
 
-[node name="Personagem2" parent="CombatController/Personagens" instance=ExtResource("2_h2ffh")]
-modulate = Color(1, 0.51025575, 0.44386888, 1)
-position = Vector2(16, 73)
-carimbo = SubResource("Resource_fss22")
+[node name="Jean" parent="CombatController/Personagens" instance=ExtResource("34_pmdni")]
+position = Vector2(16, 58)
+carimbo = SubResource("Resource_pk1fs")
+
+[node name="Clara" parent="CombatController/Personagens" instance=ExtResource("35_pk1fs")]
+position = Vector2(16, 110)
+carimbo = SubResource("Resource_mj43o")
+
+[node name="Milena" parent="CombatController/Personagens" instance=ExtResource("36_mj43o")]
+position = Vector2(16, 196)
+carimbo = SubResource("Resource_ere2o")
+
+[node name="Cadu" parent="CombatController/Personagens" instance=ExtResource("37_ere2o")]
+position = Vector2(366, 95)
+carimbo = SubResource("Resource_mpamd")
 inimigo = true
 
-[node name="Personagem3" parent="CombatController/Personagens" instance=ExtResource("2_h2ffh")]
-position = Vector2(16, 140)
-carimbo = SubResource("Resource_lce2y")
+[node name="Adhara" parent="CombatController/Personagens" instance=ExtResource("38_mpamd")]
+position = Vector2(367, 36)
+carimbo = SubResource("Resource_n6jjv")
+inimigo = true
 
-[node name="Personagem4" parent="CombatController/Personagens" instance=ExtResource("2_h2ffh")]
-position = Vector2(48, 76)
-carimbo = SubResource("Resource_omttw")
+[node name="Ana" parent="CombatController/Personagens" instance=ExtResource("39_n6jjv")]
+position = Vector2(368, 145)
+carimbo = SubResource("Resource_yrxmd")
+inimigo = true
+
+[node name="Julia" parent="CombatController/Personagens" instance=ExtResource("40_yrxmd")]
+position = Vector2(368, 203)
+carimbo = SubResource("Resource_o3s8f")
+inimigo = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(192, 128)
