@@ -9,6 +9,8 @@ const DIRECTIONS = [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]
 @export var ink_map: TileMapLayer
 @export var cell_overlay: TileMapLayer
 @export var base: Sprite2D
+@export var controles1: Label
+@export var controles2: Label
 #endregion
 
 @export var tile_selection_texture: Texture2D
@@ -33,7 +35,8 @@ func _ready() -> void:
 	
 	pos = Vector2i(0,0)
 	_old_pos = pos
-	
+	ChangeControls(Configs.controle)
+	Configs.control_changed.connect(ChangeControls)
 
 
 func GetTileContent(p: Vector2i) -> Node:
@@ -112,3 +115,23 @@ func SelectTiles(tile_list: Array[Vector2i], w_or_a: bool) -> void:
 
 func DeSelectTiles(_tile_list: Array[Vector2i]) -> void:
 	cell_overlay.clear()
+
+func ChangeControls(val: String) -> void:
+	match val:
+		"Mouse e Teclado":
+			controles1.text = "<-:
+			->:"
+			controles2.text = "esc:
+				z:"
+		"Só Teclado":
+			controles1.text = "espaco:
+				shift:"
+			controles2.text = "esc:
+				z:"
+		"Controle":
+			controles1.text = "A:
+				B:"
+			controles2.text = "Y:
+				X:"
+	
+	

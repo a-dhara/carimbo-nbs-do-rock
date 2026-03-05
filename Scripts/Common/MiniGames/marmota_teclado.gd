@@ -14,6 +14,8 @@ func _init() -> void:
 
 
 func Sobe() -> void:
+	$Som.pitch_scale = randf_range(0.9,1.1)
+	$Som.play()
 	$ColShape.disabled = false
 	var tween: Tween = create_tween()
 	tween.tween_property(
@@ -21,6 +23,8 @@ func Sobe() -> void:
 	).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 
 func Desce() -> void:
+	$Som.pitch_scale = randf_range(0.8,0.9)
+	$Som.play()
 	$ColShape.disabled = true
 	var tween: Tween = create_tween()
 	tween.tween_property(
@@ -34,6 +38,7 @@ func TentaApanha() -> void:
 	Apanha()
 
 func Apanha() -> void:
+	$Pega.play()
 	apanhado.emit()
 	modulate = Color(0.187, 0.187, 0.187, 1.0)
 	$Timer.stop()

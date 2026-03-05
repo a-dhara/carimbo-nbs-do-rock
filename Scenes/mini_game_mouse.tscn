@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dgn5tgosbaxrk"]
+[gd_scene load_steps=11 format=3 uid="uid://dgn5tgosbaxrk"]
 
 [ext_resource type="Script" uid="uid://8nmupeadmf33" path="res://Scripts/Common/MiniGames/minigame_mouse.gd" id="1_4r5ig"]
 [ext_resource type="Texture2D" uid="uid://ceb3835k4abr6" path="res://Textures/MiniGames/min-a_fundo.png" id="1_w86fb"]
+[ext_resource type="PackedScene" uid="uid://ck5sxauygq7bj" path="res://Prefabs/marmota.tscn" id="2_in0f6"]
 [ext_resource type="Texture2D" uid="uid://bgv7f2uuy53ad" path="res://Textures/MiniGames/min-a_casinhas.png" id="2_m8lm6"]
 [ext_resource type="Texture2D" uid="uid://54ya33s3gsya" path="res://Textures/MiniGames/min-a_carimbo.png" id="3_m8lm6"]
 [ext_resource type="FontFile" uid="uid://bf3ra4xupxlyw" path="res://Textures/pixelart.ttf" id="6_m8t3f"]
@@ -19,8 +20,17 @@ bg_color = Color(0.6, 0.6, 0.6, 0.34901962)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m8t3f"]
 bg_color = Color(0, 0, 0, 0.5294118)
 
-[node name="MiniGameMouse" type="Node2D"]
+[node name="MiniGameMouse" type="Node2D" node_paths=PackedStringArray("parent_marmotas", "label", "label_pont", "label_tempo", "label_final", "carimbo", "timer", "markers")]
 script = ExtResource("1_4r5ig")
+marmota_prefab = ExtResource("2_in0f6")
+parent_marmotas = NodePath("Marmotas")
+label = NodePath("TempoIni")
+label_pont = NodePath("Pontuação")
+label_tempo = NodePath("TempoJogo")
+label_final = NodePath("Final")
+carimbo = NodePath("Carimbo")
+timer = NodePath("Timer")
+markers = [NodePath("Fundo/Marker2D"), NodePath("Fundo/Marker2D2"), NodePath("Fundo/Marker2D3"), NodePath("Fundo/Marker2D4"), NodePath("Fundo/Marker2D5"), NodePath("Fundo/Marker2D6"), NodePath("Fundo/Marker2D7"), NodePath("Fundo/Marker2D8"), NodePath("Fundo/Marker2D9")]
 
 [node name="Fundo" type="Node2D" parent="."]
 

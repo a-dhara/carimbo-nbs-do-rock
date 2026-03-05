@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=13 format=3 uid="uid://ch6nq1jwea86q"]
+
+[ext_resource type="Script" uid="uid://b3qxl8oct0gwu" path="res://Scripts/Common/UI/dialogue_data.gd" id="1_hjvqt"]
+[ext_resource type="Script" uid="uid://d11h4i7cbge1o" path="res://Scripts/Common/UI/speaker_data.gd" id="2_774bh"]
+[ext_resource type="Texture2D" uid="uid://beycsyjvxmvyh" path="res://Textures/Faces/cadu-simple.png" id="3_hnvol"]
+[ext_resource type="Texture2D" uid="uid://dle6g768ik7iv" path="res://Textures/Faces/julia-simple.png" id="4_8rcn6"]
+[ext_resource type="Texture2D" uid="uid://ci7jbqhjxudt4" path="res://Textures/Faces/ana-simple.png" id="5_bb86o"]
+[ext_resource type="Texture2D" uid="uid://b6pnjpnsu6eac" path="res://Textures/Faces/jean-simple.png" id="6_5qo66"]
+[ext_resource type="Texture2D" uid="uid://comyse1oxwlpo" path="res://Textures/Faces/bruna-simple.png" id="7_gng65"]
+
+[sub_resource type="Resource" id="Resource_cw6vj"]
+script = ExtResource("2_774bh")
+speaker_texture = ExtResource("3_hnvol")
+speaker_name = "Cadu"
+messages = Array[String](["Vocês...", "não tavam pra brincadeira mesmo"])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[sub_resource type="Resource" id="Resource_bnxk4"]
+script = ExtResource("2_774bh")
+speaker_texture = ExtResource("4_8rcn6")
+speaker_name = "Júlia"
+messages = Array[String](["eu te odeio, Cadu.", "Achei que a gente tava melhor..."])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[sub_resource type="Resource" id="Resource_mcjjs"]
+script = ExtResource("2_774bh")
+speaker_texture = ExtResource("5_bb86o")
+speaker_name = "Ana"
+messages = Array[String](["Talvez na próxima"])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[sub_resource type="Resource" id="Resource_wks8u"]
+script = ExtResource("2_774bh")
+speaker_texture = ExtResource("6_5qo66")
+speaker_name = "Jean"
+side_left = true
+messages = Array[String](["kkk vocês nunca vão alcançar o Fera aqui."])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[sub_resource type="Resource" id="Resource_eu1ie"]
+script = ExtResource("2_774bh")
+speaker_texture = ExtResource("7_gng65")
+speaker_name = "Bruna"
+side_left = true
+messages = Array[String](["Vocês nunca vão vencer.", "Nem se a gente se ver na informática..."])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[resource]
+script = ExtResource("1_hjvqt")
+sequence = Array[ExtResource("2_774bh")]([SubResource("Resource_cw6vj"), SubResource("Resource_bnxk4"), SubResource("Resource_mcjjs"), SubResource("Resource_wks8u"), SubResource("Resource_eu1ie")])
+metadata/_custom_type_script = "uid://b3qxl8oct0gwu"

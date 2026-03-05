@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=9 format=3 uid="uid://b6x7xlk3t70ij"]
+
+[ext_resource type="Script" uid="uid://b3qxl8oct0gwu" path="res://Scripts/Common/UI/dialogue_data.gd" id="1_bg6bk"]
+[ext_resource type="Script" uid="uid://d11h4i7cbge1o" path="res://Scripts/Common/UI/speaker_data.gd" id="2_yuf5w"]
+[ext_resource type="Texture2D" uid="uid://cuhokta81usx7" path="res://Textures/Faces/felps neto.png" id="3_ueguv"]
+[ext_resource type="Texture2D" uid="uid://dpl5g7mjd12n2" path="res://Textures/Faces/vovó bruna.png" id="4_g7q50"]
+
+[sub_resource type="Resource" id="Resource_1yh08"]
+script = ExtResource("2_yuf5w")
+speaker_texture = ExtResource("3_ueguv")
+speaker_name = "Neto"
+messages = Array[String](["Não acredito que eles pegaram os carimbos da professora só para mostrarem no recreio!"])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[sub_resource type="Resource" id="Resource_lpxam"]
+script = ExtResource("2_yuf5w")
+speaker_texture = ExtResource("4_g7q50")
+speaker_name = "Vovó Bruna"
+side_left = true
+messages = Array[String](["sim, eles eram crianças bem atrevidas.", "Mas foi porque eles arrumavam confusões que acabamos nos tornando amigos..."])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[sub_resource type="Resource" id="Resource_yvjli"]
+script = ExtResource("2_yuf5w")
+speaker_texture = ExtResource("3_ueguv")
+speaker_name = "Neto"
+messages = Array[String](["E a senhora não sente falta deles?"])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[sub_resource type="Resource" id="Resource_8m2hp"]
+script = ExtResource("2_yuf5w")
+speaker_texture = ExtResource("4_g7q50")
+speaker_name = "Vovó Bruna"
+side_left = true
+messages = Array[String](["E muito!", "Mas ao menos, posso te contar essas boas histórias"])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[resource]
+script = ExtResource("1_bg6bk")
+sequence = Array[ExtResource("2_yuf5w")]([SubResource("Resource_1yh08"), SubResource("Resource_lpxam"), SubResource("Resource_yvjli"), SubResource("Resource_8m2hp")])
+metadata/_custom_type_script = "uid://b3qxl8oct0gwu"

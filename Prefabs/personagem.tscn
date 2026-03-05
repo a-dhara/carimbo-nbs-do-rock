@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dm3edns8np7xw"]
+[gd_scene load_steps=20 format=3 uid="uid://dm3edns8np7xw"]
 
 [ext_resource type="Script" uid="uid://kyttbblkqsjn" path="res://Scripts/personagem.gd" id="1_jsisd"]
 [ext_resource type="Resource" uid="uid://b7a3tl34xk6rj" path="res://Data/grid.tres" id="2_484bd"]
@@ -8,6 +8,14 @@
 [ext_resource type="Texture2D" uid="uid://dwrrjta7jb411" path="res://Textures/Icons/tinta-normal-phdr.png" id="4_av2s2"]
 [ext_resource type="Texture2D" uid="uid://bqrnovuem7qao" path="res://Textures/Icons/barra_de_carimbada0.png" id="7_4rqik"]
 [ext_resource type="Texture2D" uid="uid://crd1b1eitvdxq" path="res://Textures/sprite_base.png" id="7_svfxi"]
+[ext_resource type="Texture2D" uid="uid://da0ub53ibcycx" path="res://Textures/Icons/barra_ações.png" id="9_av2s2"]
+[ext_resource type="Texture2D" uid="uid://dk23u7n4sxaop" path="res://Textures/Icons/ação.png" id="9_gdon4"]
+[ext_resource type="AudioStream" uid="uid://ms1n0ci54ghh" path="res://Textures/SoundEffects/pers_andando.wav" id="11_dm6o3"]
+[ext_resource type="AudioStream" uid="uid://7sbe2t6gsa1s" path="res://Textures/SoundEffects/atordoado.wav" id="12_tsyt4"]
+[ext_resource type="AudioStream" uid="uid://ckx6dyrahws4f" path="res://Textures/SoundEffects/carimbo_acertado.wav" id="13_cogl7"]
+[ext_resource type="AudioStream" uid="uid://dx3rdtrligyi3" path="res://Textures/SoundEffects/inimigo_caído.wav" id="14_ice7n"]
+[ext_resource type="AudioStream" uid="uid://66tr5x5gdtb8" path="res://Textures/SoundEffects/aliado_caído.wav" id="15_04gx1"]
+[ext_resource type="AudioStream" uid="uid://w08i073am7h2" path="res://Textures/SoundEffects/carregar_carimbo.wav" id="16_04gx1"]
 
 [sub_resource type="Resource" id="Resource_av2s2"]
 script = ExtResource("3_4rqik")
@@ -28,7 +36,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Personagem" type="Node2D" node_paths=PackedStringArray("sprite", "selected_sprite", "tinta_sprite", "carr_tinta_label", "carimbos_sprite", "avisos")]
+[node name="Personagem" type="Node2D" node_paths=PackedStringArray("sprite", "selected_sprite", "tinta_sprite", "carr_tinta_label", "carimbos_sprite", "avisos", "sprite_acoes", "sprite_moveu", "sprite_agiu")]
 script = ExtResource("1_jsisd")
 sprite = NodePath("AnimatedSprite2D")
 selected_sprite = NodePath("Selected")
@@ -38,6 +46,9 @@ carimbos_sprite = NodePath("Carimbos")
 avisos = NodePath("Avisos")
 grid = ExtResource("2_484bd")
 carimbo = SubResource("Resource_av2s2")
+sprite_acoes = NodePath("BarraAções")
+sprite_moveu = NodePath("BarraAções/JaMoveu")
+sprite_agiu = NodePath("BarraAções/JaAgiu")
 
 [node name="Tinta" type="Sprite2D" parent="."]
 position = Vector2(27, -14)
@@ -82,3 +93,37 @@ offset_top = -12.0
 offset_right = 12.285709
 offset_bottom = 36.571426
 scale = Vector2(0.6, 0.6)
+
+[node name="BarraAções" type="Sprite2D" parent="."]
+position = Vector2(0, -23)
+texture = ExtResource("9_av2s2")
+
+[node name="JaMoveu" type="Sprite2D" parent="BarraAções"]
+visible = false
+modulate = Color(0.26390004, 0.4361932, 0.91, 1)
+position = Vector2(-3.984055, 4.474142)
+texture = ExtResource("9_gdon4")
+
+[node name="JaAgiu" type="Sprite2D" parent="BarraAções"]
+visible = false
+modulate = Color(1, 0.29000002, 0.29000002, 1)
+position = Vector2(3, 4.501993)
+texture = ExtResource("9_gdon4")
+
+[node name="Caminhando" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_dm6o3")
+
+[node name="Atordoado" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_tsyt4")
+
+[node name="Carimbado" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_cogl7")
+
+[node name="CaidoInimigo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_ice7n")
+
+[node name="CaidoAliado" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_04gx1")
+
+[node name="CarrregarCarimbo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_04gx1")

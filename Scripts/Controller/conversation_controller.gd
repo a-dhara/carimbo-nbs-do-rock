@@ -37,6 +37,7 @@ func Next() -> void:
 
 func Sequence(data: DialogueData) -> void:
 	for sp_d in data.sequence:
+		$"../../Text".play()
 		in_transition = true
 		await panel.Show(true)
 		in_transition = false

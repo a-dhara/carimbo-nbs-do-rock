@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=13 format=3 uid="uid://cam8gn1q63ypg"]
+
+[ext_resource type="Script" uid="uid://b3qxl8oct0gwu" path="res://Scripts/Common/UI/dialogue_data.gd" id="1_c75ek"]
+[ext_resource type="Script" uid="uid://d11h4i7cbge1o" path="res://Scripts/Common/UI/speaker_data.gd" id="2_bmvos"]
+[ext_resource type="Texture2D" uid="uid://comyse1oxwlpo" path="res://Textures/Faces/bruna-simple.png" id="3_ephxi"]
+[ext_resource type="Texture2D" uid="uid://beycsyjvxmvyh" path="res://Textures/Faces/cadu-simple.png" id="4_4akud"]
+[ext_resource type="Texture2D" uid="uid://d2jbsjm86pt3w" path="res://Textures/Faces/maga-simple.png" id="5_456qh"]
+[ext_resource type="Texture2D" uid="uid://ci7jbqhjxudt4" path="res://Textures/Faces/ana-simple.png" id="6_usq3s"]
+[ext_resource type="Texture2D" uid="uid://congekduqm468" path="res://Textures/Faces/milena-simple.png" id="7_l3wi4"]
+
+[sub_resource type="Resource" id="Resource_ccua6"]
+script = ExtResource("2_bmvos")
+speaker_texture = ExtResource("3_ephxi")
+speaker_name = "Bruna"
+side_left = true
+messages = Array[String](["Nos Encontramos de novo..."])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[sub_resource type="Resource" id="Resource_qsnbl"]
+script = ExtResource("2_bmvos")
+speaker_texture = ExtResource("4_4akud")
+speaker_name = "Cadu"
+messages = Array[String](["Vocês estão ferrados desta vez..."])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[sub_resource type="Resource" id="Resource_pg7hi"]
+script = ExtResource("2_bmvos")
+speaker_texture = ExtResource("5_456qh")
+speaker_name = "Clara"
+side_left = true
+messages = Array[String](["Vocês falam de mais pra quem faz de menos."])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[sub_resource type="Resource" id="Resource_286ut"]
+script = ExtResource("2_bmvos")
+speaker_texture = ExtResource("6_usq3s")
+speaker_name = "Ana"
+messages = Array[String](["Vocês mal podem esperar a bomba que a gente fez... literalmente."])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[sub_resource type="Resource" id="Resource_n7des"]
+script = ExtResource("2_bmvos")
+speaker_texture = ExtResource("7_l3wi4")
+speaker_name = "Milena"
+side_left = true
+messages = Array[String](["E vocês acham que a gente ia ficar pra trás?"])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[resource]
+script = ExtResource("1_c75ek")
+sequence = Array[ExtResource("2_bmvos")]([SubResource("Resource_ccua6"), SubResource("Resource_qsnbl"), SubResource("Resource_pg7hi"), SubResource("Resource_286ut"), SubResource("Resource_n7des")])
+metadata/_custom_type_script = "uid://b3qxl8oct0gwu"

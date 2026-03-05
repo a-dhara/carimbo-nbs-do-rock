@@ -75,6 +75,8 @@ func Act(en: Personagem) -> void:
 func Carimba(p: Personagem, en: Personagem) -> void:
 	p.carimbadas += 1
 	en.carimbo_carr = false
+	if p.carimbadas == 3:
+		characters.pop_at(characters.find(p))
 	await get_tree().create_timer(1.0).timeout
 
 func Carrega(en: Personagem) -> void:

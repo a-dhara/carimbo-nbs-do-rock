@@ -28,10 +28,11 @@ func OnMove(_e: Vector2i) -> void:
 func OnPress(_e: bool) -> void:
 	if _e:
 		if tiles.has(_owner.current_tile):
-			
+			$"../../../Confirma".play()
 			_owner.state_machine.ChangeState(move_sequence_state)
 	else:
 		_owner.state_machine.ChangeState(action_selection_state)
+		$"../../../Cancela".play()
 
 func OnMouseMotion(_e: Vector2) -> void:
 	SelectTile(_owner.board.grid.calcula_coord_grid(_e))

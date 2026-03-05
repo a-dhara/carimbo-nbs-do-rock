@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bh3chijflo0bw"]
+
+[ext_resource type="Script" uid="uid://bfcloxvan8wha" path="res://Scenes/creditos.gd" id="1_eml6v"]
+
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_go6a7"]
+
+[node name="Creditos" type="VideoStreamPlayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+stream = SubResource("VideoStreamTheora_go6a7")
+script = ExtResource("1_eml6v")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

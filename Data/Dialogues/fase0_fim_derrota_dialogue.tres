@@ -1,0 +1,59 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=14 format=3 uid="uid://drci7ov70hepl"]
+
+[ext_resource type="Script" uid="uid://b3qxl8oct0gwu" path="res://Scripts/Common/UI/dialogue_data.gd" id="1_n55h6"]
+[ext_resource type="Script" uid="uid://d11h4i7cbge1o" path="res://Scripts/Common/UI/speaker_data.gd" id="2_3vt17"]
+[ext_resource type="Texture2D" uid="uid://comyse1oxwlpo" path="res://Textures/Faces/bruna-simple.png" id="3_cw6vj"]
+[ext_resource type="Texture2D" uid="uid://congekduqm468" path="res://Textures/Faces/milena-simple.png" id="4_ka078"]
+[ext_resource type="Texture2D" uid="uid://beycsyjvxmvyh" path="res://Textures/Faces/cadu-simple.png" id="5_i03sj"]
+[ext_resource type="Texture2D" uid="uid://dle6g768ik7iv" path="res://Textures/Faces/julia-simple.png" id="6_e0yhg"]
+[ext_resource type="Texture2D" uid="uid://ci7jbqhjxudt4" path="res://Textures/Faces/ana-simple.png" id="7_1a8eq"]
+
+[sub_resource type="Resource" id="Resource_cw6vj"]
+script = ExtResource("2_3vt17")
+speaker_texture = ExtResource("3_cw6vj")
+speaker_name = "Bruna"
+side_left = true
+messages = Array[String](["Vocês venceram dessa vez...", "patetas..."])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[sub_resource type="Resource" id="Resource_8q8vl"]
+script = ExtResource("2_3vt17")
+speaker_texture = ExtResource("4_ka078")
+speaker_name = "Milena"
+side_left = true
+messages = Array[String](["Isso... Não pode ficar desse jeito."])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[sub_resource type="Resource" id="Resource_i03sj"]
+script = ExtResource("2_3vt17")
+speaker_texture = ExtResource("5_i03sj")
+speaker_name = "Cadu"
+messages = Array[String](["hahaha", "quero ver o que vão fazer agora...", "palermas..."])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[sub_resource type="Resource" id="Resource_e0yhg"]
+script = ExtResource("2_3vt17")
+speaker_texture = ExtResource("6_e0yhg")
+speaker_name = "Julia"
+messages = Array[String](["tá bom já, Cadu..."])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[sub_resource type="Resource" id="Resource_0s5ta"]
+script = ExtResource("2_3vt17")
+speaker_texture = ExtResource("7_1a8eq")
+speaker_name = "Ana"
+messages = Array[String](["Hehe eles já foram humilhados o suficiente"])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[sub_resource type="Resource" id="Resource_d3488"]
+script = ExtResource("2_3vt17")
+speaker_texture = ExtResource("3_cw6vj")
+speaker_name = "Bruna"
+side_left = true
+messages = Array[String](["Nós vemos...", "em breve.", "Em algum lugar...", "talvez na sala de informática..."])
+metadata/_custom_type_script = "uid://d11h4i7cbge1o"
+
+[resource]
+script = ExtResource("1_n55h6")
+sequence = Array[ExtResource("2_3vt17")]([SubResource("Resource_cw6vj"), SubResource("Resource_8q8vl"), SubResource("Resource_i03sj"), SubResource("Resource_e0yhg"), SubResource("Resource_0s5ta"), SubResource("Resource_d3488")])
+metadata/_custom_type_script = "uid://b3qxl8oct0gwu"

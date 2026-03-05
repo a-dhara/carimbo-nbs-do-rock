@@ -35,9 +35,10 @@ func _process(_delta: float) -> void:
 		quit_event.emit()
 	
 	# Movimento do mouse
-	var curr_mouse: Vector2 = get_viewport().get_mouse_position()
-	var mouse_offset: Vector2 = Vector2(-32,-32)
-	if _last_mouse != curr_mouse:
-		_last_mouse = curr_mouse
-		mouse_motion.emit(curr_mouse + mouse_offset)
+	if get_viewport():
+		var curr_mouse: Vector2 = get_viewport().get_mouse_position()
+		var mouse_offset: Vector2 = Vector2(-32,-32)
+		if _last_mouse != curr_mouse:
+			_last_mouse = curr_mouse
+			mouse_motion.emit(curr_mouse + mouse_offset)
 	

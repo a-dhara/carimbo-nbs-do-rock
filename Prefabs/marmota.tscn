@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ck5sxauygq7bj"]
+[gd_scene load_steps=6 format=3 uid="uid://ck5sxauygq7bj"]
 
 [ext_resource type="Script" uid="uid://brlybfjx5kb0o" path="res://Scripts/Common/MiniGames/marmota.gd" id="1_15ugk"]
 [ext_resource type="Texture2D" uid="uid://vgdkqb1jxjv3" path="res://Textures/MiniGames/min-a_carinhas.png" id="1_ub66u"]
+[ext_resource type="AudioStream" uid="uid://bkh7ucb4jj7gk" path="res://Textures/SoundEffects/marmota.wav" id="3_3tql6"]
+[ext_resource type="AudioStream" uid="uid://x8ebid7f2uqm" path="res://Textures/SoundEffects/acertou_marmota.wav" id="4_jcqck"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_15ugk"]
 size = Vector2(26, 27)
@@ -18,5 +20,13 @@ disabled = true
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="Som" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_3tql6")
+volume_db = -25.653
+
+[node name="Pega" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_jcqck")
+volume_db = 10.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

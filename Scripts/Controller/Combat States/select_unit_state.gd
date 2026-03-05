@@ -1,12 +1,35 @@
 extends CombatState
 
+
+
 @export var action_selection_state: State
 @export var enemy_state: State
+@export var dialogue_state: State
 
 func Enter() -> void:
 	super()
-	if FimJogoq():
-		get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+	if characters.size() == 0:
+		dialogue_state.fim = true
+		dialogue_state.vitoria = false
+		if _owner.fase == 0:
+			dialogue_state.data = load("res://Data/Dialogues/fase0_fim_derrota_dialogue.tres")
+		if _owner.fase == 1:
+			dialogue_state.data = load("res://Data/Dialogues/final.tres")
+			_owner.music.stream = load("res://Textures/Musicas/january_feeling.mp3")
+			$"../../DialogueController/TextureRect2".show()
+		_owner.state_machine.ChangeState(dialogue_state)
+		return
+	if enemies.size() == 0:
+		dialogue_state.fim = true
+		dialogue_state.vitoria = true
+		if _owner.fase == 0:
+			dialogue_state.data = load("res://Data/Dialogues/fase0_fim_vitoria_dialogue.tres")
+		if _owner.fase == 1:
+			dialogue_state.data = load("res://Data/Dialogues/final.tres")
+			_owner.music.stream = load("res://Textures/Musicas/january_feeling.mp3")
+			$"../../DialogueController/TextureRect2".show()
+		_owner.state_machine.ChangeState(dialogue_state)
+		return
 	_owner.current_char = null
 	var fim_turno: bool = true
 	for p in characters:
@@ -28,24 +51,11 @@ func OnPress(_e: bool) -> void:
 			var obj = _owner.board.conteudo[_owner.board.pos]
 			if obj is Personagem and not obj.inimigo: # Tá um pouquinho hard coded mas vambora
 				if (not obj.turno.ja_agiu and ((not obj.carimbo_carr) or _owner.board.GetAttackableCells(obj).size() != 0)) or (not obj.turno.ja_moveu):
-					current_char = obj
-					_owner.state_machine.ChangeState(action_selection_state)
+					if obj.carimbadas < 3:
+						current_char = obj
+						$"../../../Confirma".play()
+						_owner.state_machine.ChangeState(action_selection_state)
 		else:
 			current_char = null
 	else:
 		current_char = null
-
-func FimJogoq() -> bool:
-	var out: bool = true
-	
-	for p in characters:
-		if p.carimbadas < 3:
-			out = false
-	
-	if not out:
-		out = true
-		for e in enemies:
-			if e.carimbadas < 3:
-				out = false
-	
-	return out

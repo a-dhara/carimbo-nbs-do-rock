@@ -53,11 +53,13 @@ func LoadMenu() -> void:
 	await action_menu_controller.Show(current_char.position)
 
 func Cancel() -> void:
+	$"../../../Cancela".play()
 	_owner.state_machine.ChangeState(select_unit_state)
 	if info_menu_controller.shown:
 		info_menu_controller.HideMenu()
 
 func Confirm() -> void:
+	$"../../../Confirma".play()
 	match action_menu_controller.selection:
 		0:
 			current_char.carimbo_carr = true

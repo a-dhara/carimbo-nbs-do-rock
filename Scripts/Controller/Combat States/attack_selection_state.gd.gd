@@ -25,6 +25,7 @@ func OnPress(_e: bool) -> void:
 		if tiles.has(_owner.current_tile) and _owner.board.conteudo[_owner.current_tile].carimbadas < 3:
 			_owner.curr_enemy = _owner.board.conteudo[_owner.current_tile]
 			current_char.turno.ja_agiu = true
+			$"../../../Confirma".play()
 			_owner.state_machine.ChangeState(mini_game_state)
 			#if current_char.turno.ja_moveu:
 				#_owner.state_machine.ChangeState(select_unit_state)
@@ -32,6 +33,7 @@ func OnPress(_e: bool) -> void:
 				#_owner.state_machine.ChangeState(action_selection_state)
 	else:
 		_owner.state_machine.ChangeState(action_selection_state)
+		$"../../../Cancela".play()
 
 func OnMouseMotion(_e: Vector2) -> void:
 	SelectTile(_owner.board.grid.calcula_coord_grid(_e))

@@ -13,7 +13,11 @@ config_version=5
 config/name="Carimbo FelpoJAM"
 run/main_scene="uid://c8ws7xxe4s4qq"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="uid://tyj0tktal33b"
+config/icon="uid://bjm8rnsal2bi6"
+
+[autoload]
+
+Configs="*res://Scripts/Global/configs.gd"
 
 [display]
 

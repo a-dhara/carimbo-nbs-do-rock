@@ -540,5 +540,5 @@ animations = [{
 
 [node name="AnimatedSprite2D" parent="." index="4"]
 sprite_frames = SubResource("SpriteFrames_k7ib7")
-animation = &"bomba"
+animation = &"default"
 autoplay = "default"

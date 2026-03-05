@@ -1,10 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://c8ws7xxe4s4qq"]
+[gd_scene load_steps=13 format=3 uid="uid://c8ws7xxe4s4qq"]
 
 [ext_resource type="Texture2D" uid="uid://dp5l88qad5v1r" path="res://Textures/Menus/main_menu_backg.png" id="1_48xlc"]
 [ext_resource type="Script" uid="uid://d4au87eqhvhb1" path="res://Scripts/Controller/main_menu.gd" id="1_ce3w2"]
 [ext_resource type="Texture2D" uid="uid://bijyqw4xqjyev" path="res://Textures/Menus/main_menu_front.png" id="2_1ehe0"]
 [ext_resource type="FontFile" uid="uid://bf3ra4xupxlyw" path="res://Textures/pixelart.ttf" id="3_1ehe0"]
 [ext_resource type="AudioStream" uid="uid://bihiutqewgngk" path="res://Textures/Musicas/menu_song.mp3" id="5_n45e2"]
+[ext_resource type="Script" uid="uid://csen6jgssgagt" path="res://Scripts/Controller/input_controller.gd" id="6_opfnp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n45e2"]
+bg_color = Color(0.0627451, 0.0627451, 0.14901961, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="Animation" id="Animation_1ehe0"]
 length = 0.001
@@ -59,7 +67,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("VBoxContainer:modulate")
+tracks/4/path = NodePath("VBox0:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -122,7 +130,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("VBoxContainer:modulate")
+tracks/3/path = NodePath("VBox0:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -186,7 +194,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("VBoxContainer:modulate")
+tracks/3/path = NodePath("VBox0:modulate")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -250,7 +258,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("VBoxContainer:modulate")
+tracks/4/path = NodePath("VBox0:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -280,12 +288,16 @@ _data = {
 &"play_menu": SubResource("Animation_48xlc")
 }
 
-[node name="MainMenu" type="Node2D" node_paths=PackedStringArray("anim_player", "vbox", "labels", "audio_sp")]
+[node name="MainMenu" type="Node2D" node_paths=PackedStringArray("anim_player", "vbox0", "vbox1", "labels", "labelsc", "audio_sp", "input_controller", "front_sprite")]
 script = ExtResource("1_ce3w2")
 anim_player = NodePath("AnimationPlayer")
-vbox = NodePath("VBoxContainer")
-labels = [NodePath("VBoxContainer/Iniciar"), NodePath("VBoxContainer/Configs"), NodePath("VBoxContainer/Sair")]
+vbox0 = NodePath("VBox0")
+vbox1 = NodePath("VBox1")
+labels = [NodePath("VBox0/Iniciar"), NodePath("VBox0/Configs"), NodePath("VBox0/Sair")]
+labelsc = [NodePath("VBox1/Volume"), NodePath("VBox1/Controle"), NodePath("VBox1/Sair")]
 audio_sp = NodePath("AudioStreamPlayer")
+input_controller = NodePath("InputController")
+front_sprite = NodePath("Front")
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0.7529412, 0.7529412, 0.7529412, 1)
@@ -311,7 +323,7 @@ theme_override_fonts/font = ExtResource("3_1ehe0")
 theme_override_font_sizes/font_size = 30
 text = "GUERRA   DOS   CARIMBOS"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBox0" type="VBoxContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -325,7 +337,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 31
 
-[node name="Iniciar" type="Label" parent="VBoxContainer"]
+[node name="Iniciar" type="Label" parent="VBox0"]
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_1ehe0")
@@ -334,7 +346,7 @@ text = "Iniciar
 "
 horizontal_alignment = 1
 
-[node name="Configs" type="Label" parent="VBoxContainer"]
+[node name="Configs" type="Label" parent="VBox0"]
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_1ehe0")
@@ -343,13 +355,64 @@ text = "Configuracoes
 "
 horizontal_alignment = 1
 
-[node name="Sair" type="Label" parent="VBoxContainer"]
+[node name="Sair" type="Label" parent="VBox0"]
 layout_mode = 2
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_1ehe0")
 theme_override_font_sizes/font_size = 14
 text = "sair"
 horizontal_alignment = 1
+
+[node name="VBox1" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 99.0
+offset_top = 163.0
+offset_right = 360.0
+offset_bottom = 296.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 31
+alignment = 1
+
+[node name="Volume" type="Label" parent="VBox1"]
+custom_minimum_size = Vector2(50, 25)
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_1ehe0")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_n45e2")
+text = "Volume: < 20 >"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Controle" type="Label" parent="VBox1"]
+custom_minimum_size = Vector2(300, 25)
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_1ehe0")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_n45e2")
+text = "Controle: < Mouse e Teclado >"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sair" type="Label" parent="VBox1"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_1ehe0")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_n45e2")
+text = "Voltar"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -371,3 +434,7 @@ autowrap_mode = 1
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_n45e2")
 volume_db = -6.24
+
+[node name="InputController" type="Node" parent="."]
+script = ExtResource("6_opfnp")
+metadata/_custom_type_script = "uid://csen6jgssgagt"

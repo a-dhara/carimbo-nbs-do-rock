@@ -3,14 +3,21 @@ class_name Turn
 
 var _actor: Personagem
 
-var ja_moveu: bool
-var ja_agiu: bool
+var ja_moveu: bool:
+	set(value):
+		_actor.sprite_moveu.visible = value
+		ja_moveu = value
+var ja_agiu: bool:
+	set(value):
+		_actor.sprite_agiu.visible = value
+		ja_agiu = value
 var trava_mov: bool
 
 var pos_ini: Vector2i
 
 func _init(actor: Personagem) -> void:
 	_actor = actor
+	Reinicia()
 
 func Reinicia() -> void:
 	ja_moveu = false
@@ -27,8 +34,3 @@ func Reinicia() -> void:
 	if _actor.carimbadas == 3:
 		ja_moveu = true
 		ja_agiu = true
-
-
-func DesfazMov() -> void:
-	ja_moveu = false
-	_actor.Place(pos_ini)

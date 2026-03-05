@@ -1,13 +1,17 @@
 extends CombatState
 
+signal fim_de_jogo()
+
 @export var select_unit_state: State
 
-var data_test: DialogueData
+var data: DialogueData
+
+var fim: bool = false
+var vitoria: bool = true
 
 func Enter() -> void:
 	super()
-	data_test = load("res://Data/Dialogues/dialogue_test_1.tres")
-	_owner.conversation_controller.ShowDialogue(data_test)
+	_owner.conversation_controller.ShowDialogue(data)
 
 func AddSignals() -> void:
 	super()
@@ -24,4 +28,13 @@ func OnPress(_e: bool) -> void:
 
 
 func OnCompleteDialogue() -> void:
+	if fim:
+		if vitoria:
+			fim_de_jogo.emit()
+			_owner.state_machine.ChangeState(null)
+			return
+		else:
+			fim_de_jogo.emit()
+			_owner.state_machine.ChangeState(null)
+			return
 	_owner.state_machine.ChangeState(select_unit_state)

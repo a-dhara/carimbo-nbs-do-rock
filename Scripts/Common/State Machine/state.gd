@@ -7,8 +7,8 @@ func Enter() -> void:
 func Exit() -> void:
 	RemoveSignals()
 
-func _exit_tree() -> void:
-	RemoveSignals()
+#func _exit_tree() -> void:
+	#RemoveSignals()
 
 func AddSignals() -> void:
 	pass

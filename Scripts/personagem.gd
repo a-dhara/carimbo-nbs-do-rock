@@ -11,6 +11,9 @@ class_name Personagem
 @export var grid: Grid
 @export var carimbo: Carimbo # Carimbo que personagem está usando
 @export var turno: Turn
+@export var sprite_acoes: Sprite2D
+@export var sprite_moveu: Sprite2D
+@export var sprite_agiu: Sprite2D
 #endregion
 
 #region Textures
@@ -40,22 +43,32 @@ var veloc_mov: float = 4.0: # velocidade de movimento, afetada pela lentidão
 #region Variáveis do personagem
 @export var lento: int = 0:
 	set(value):
-		if value > 0: default_anim = "pos_bomba"
+		if value > 0 and carimbadas < 3: default_anim = "pos_bomba"
 		lento = value
 @export var atordoado: int = 0:
 	set(value):
-		if value > 0: sprite.animation = "atordoado"
+		if value > 0 and carimbadas < 3:
+			sprite.animation = "atordoado"
+			$Atordoado.play()
 		atordoado = value
 @export var carimbadas: int = 0:
 	set(value):
 		carimbadas = value
+		$Carimbado.play()
 		carimbos_sprite.texture = tex_carimbos[value]
 		if carimbadas == 2:
 			default_anim = "2_carimb"
 		if carimbadas == 3:
+			if inimigo:
+				$CaidoInimigo.play()
+			else:
+				$CaidoAliado.play()
+			turno.ja_agiu = true
+			turno.ja_moveu = true
 			sprite.animation = "3_carimb"
 			await sprite.animation_finished
 			default_anim = "caido"
+			sprite.animation = "caido"
 			modulate = Color(0.307, 0.307, 0.307, 1.0)
 var selected: bool = false:
 	set(value):
@@ -66,7 +79,12 @@ var selected: bool = false:
 var carimbo_carr: bool:
 	set(value):
 		carimbo.carregado = value
-		if value:
+		carimbo_carr = value
+		if carimbo.tipo == Carimbo.Tipos.AUTOMATICO:
+			carimbo.carregado = true
+			carimbo_carr = true
+		if carimbo_carr:
+			$CarrregarCarimbo.play()
 			Aviso("carregando")
 			if carimbo.tipo == carimbo.Tipos.BOMBA:
 				Aviso("bomba: " + str(carimbo.prepara_bomba) + "/3")
@@ -109,6 +127,7 @@ func Caminhar(final: Vector2i) -> void:
 	sprite.animation = "andando"
 	Aviso("andando")
 	Place(final)
+	$Caminhando.play()
 	for t in tiles_caminho:
 		var dir: Vector2i = Vector2i(t) - pos_grid
 		if dir.x < 0:
@@ -131,6 +150,9 @@ func _ready() -> void:
 	Place(grid.calcula_coord_grid(global_position))
 	Ajeita()
 	if carimbo.tipo == carimbo.Tipos.AUTOMATICO: carimbo_carr = true
+	if inimigo:
+		sprite.modulate = Color(1.0, 0.695, 0.647, 1.0)
+		sprite_acoes.hide()
 
 func Aviso(txt: String) -> void:
 	var label: Label = Label.new()

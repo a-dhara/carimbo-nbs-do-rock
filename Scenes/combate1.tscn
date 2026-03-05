@@ -1,0 +1,666 @@
+[gd_scene load_steps=75 format=4 uid="uid://cvrtqig0plwf4"]
+
+[ext_resource type="Script" uid="uid://fyfgpqma7etn" path="res://Scripts/Controller/combat_controller.gd" id="1_sre2n"]
+[ext_resource type="PackedScene" uid="uid://dm3edns8np7xw" path="res://Prefabs/personagem.tscn" id="2_4gsap"]
+[ext_resource type="Script" uid="uid://c8urpj3ab8e2k" path="res://Scripts/Common/State Machine/state_machine.gd" id="3_goisr"]
+[ext_resource type="Script" uid="uid://d33nx0nnhey" path="res://Scripts/Controller/Combat States/init_combat_state.gd" id="4_r8aoa"]
+[ext_resource type="Script" uid="uid://6fhb414cxtee" path="res://Scripts/Controller/Combat States/dialogue_state.gd" id="5_8p1ig"]
+[ext_resource type="Script" uid="uid://d1vr65tbyslrw" path="res://Scripts/Controller/Combat States/select_unit_state.gd" id="6_qcq6d"]
+[ext_resource type="Script" uid="uid://b44wghthi6ta1" path="res://Scripts/Controller/Combat States/action_selection_state.gd" id="7_df08h"]
+[ext_resource type="Texture2D" uid="uid://dwrrjta7jb411" path="res://Textures/Icons/tinta-normal-phdr.png" id="8_jv4sq"]
+[ext_resource type="Texture2D" uid="uid://decfnmt8joitv" path="res://Textures/Icons/tinta-selecionado-phdr.png" id="9_f2lks"]
+[ext_resource type="Texture2D" uid="uid://sqj480i3syhy" path="res://Textures/Icons/move-normal-phdr.png" id="10_suqpp"]
+[ext_resource type="Texture2D" uid="uid://byn2umxbox2vi" path="res://Textures/Icons/move-selecionado-phdr.png" id="11_5otov"]
+[ext_resource type="Texture2D" uid="uid://tyj0tktal33b" path="res://Textures/Icons/carimbo-normal-phdr.png" id="12_4pdpe"]
+[ext_resource type="Texture2D" uid="uid://cl816ror0hw4o" path="res://Textures/Icons/carimbo-selecionado-phdr.png" id="13_nxi3n"]
+[ext_resource type="Script" uid="uid://cnoit0jumxisf" path="res://Scripts/Controller/Combat States/move_selection_state.gd" id="14_kb6np"]
+[ext_resource type="Script" uid="uid://b45whgkcwk4ag" path="res://Scripts/Controller/Combat States/move_sequence_state.gd" id="15_r3eio"]
+[ext_resource type="Script" uid="uid://ftaybp273t4i" path="res://Scripts/Controller/Combat States/attack_selection_state.gd.gd" id="16_wuyn4"]
+[ext_resource type="Script" uid="uid://d014tbsjg08ot" path="res://Scripts/Controller/Combat States/minigame_state.gd" id="17_yxy08"]
+[ext_resource type="PackedScene" uid="uid://dgn5tgosbaxrk" path="res://Scenes/mini_game_mouse.tscn" id="18_nsqrw"]
+[ext_resource type="PackedScene" uid="uid://dbsmss6o3ibey" path="res://Scenes/mini_game_teclado.tscn" id="19_ngf8d"]
+[ext_resource type="PackedScene" uid="uid://btmm2n1knrm5b" path="res://Scenes/mini_game_controle.tscn" id="20_nltgv"]
+[ext_resource type="Script" uid="uid://l4w138h56mv5" path="res://Scripts/Controller/Combat States/enemy_state.gd" id="21_4pabw"]
+[ext_resource type="Script" uid="uid://u60220v2ne6i" path="res://Scripts/Controller/Combat States/roundup_state.gd" id="22_18kjv"]
+[ext_resource type="Script" uid="uid://dlffpfhvvnrk0" path="res://Scripts/Controller/Combat States/pause_state.gd" id="23_oeecs"]
+[ext_resource type="Script" uid="uid://csen6jgssgagt" path="res://Scripts/Controller/input_controller.gd" id="24_1vb6e"]
+[ext_resource type="Script" uid="uid://db80vididg1" path="res://Scripts/Controller/conversation_controller.gd" id="25_hkf44"]
+[ext_resource type="Script" uid="uid://cn70yrfy17vof" path="res://Scripts/Common/UI/conversation_panel.gd" id="26_hxaie"]
+[ext_resource type="FontFile" uid="uid://bf3ra4xupxlyw" path="res://Textures/pixelart.ttf" id="27_sps32"]
+[ext_resource type="Script" uid="uid://ddaxcikhv2r5o" path="res://Scripts/Controller/action_menu_controller.gd" id="28_upm2w"]
+[ext_resource type="PackedScene" uid="uid://dy4y0dp6gtipy" path="res://Prefabs/menu_entry.tscn" id="29_0v5gg"]
+[ext_resource type="Script" uid="uid://coklfq5mcd7y5" path="res://Scripts/Common/UI/action_menu_panel.gd" id="30_sl8n7"]
+[ext_resource type="Script" uid="uid://bx3r0uhc18v20" path="res://Scripts/Controller/info_menu_controller.gd" id="31_fwiq8"]
+[ext_resource type="Script" uid="uid://cbl7shgryopyy" path="res://Scripts/Common/UI/info_menu_panel.gd" id="32_6b3fq"]
+[ext_resource type="Texture2D" uid="uid://bmm0ckn0p5fvd" path="res://Textures/Carimbos/carimbo-normal.png" id="33_cynsd"]
+[ext_resource type="Script" uid="uid://dvkrhjslvdrph" path="res://Scripts/Controller/pause_menu_controller.gd" id="34_jsk6i"]
+[ext_resource type="AudioStream" uid="uid://dfplyfjokvsrb" path="res://Textures/Musicas/musica_vibesV2.mp3" id="35_br0pv"]
+[ext_resource type="Script" uid="uid://l52j551pg4hb" path="res://Scripts/Common/board.gd" id="36_8p1ig"]
+[ext_resource type="Resource" uid="uid://b7a3tl34xk6rj" path="res://Data/grid.tres" id="37_qcq6d"]
+[ext_resource type="PackedScene" uid="uid://cyunqs62slj6i" path="res://Scenes/Personagens/bruna.tscn" id="37_t523c"]
+[ext_resource type="Texture2D" uid="uid://dnjqn1oy14hgt" path="res://Textures/marker-test.png" id="38_df08h"]
+[ext_resource type="Script" uid="uid://co7s5lm0yyc3u" path="res://Scripts/carimbo.gd" id="38_fvcul"]
+[ext_resource type="PackedScene" uid="uid://c2chw6ytknnui" path="res://Scenes/Personagens/jean.tscn" id="39_5ed2s"]
+[ext_resource type="Texture2D" uid="uid://83yoccr61r48" path="res://Textures/Lugares/informatica.png" id="39_jv4sq"]
+[ext_resource type="PackedScene" uid="uid://c1u541lx1u0vh" path="res://Scenes/Personagens/clara.tscn" id="40_e51gm"]
+[ext_resource type="Texture2D" uid="uid://bij8pehwealnt" path="res://Textures/walkable_cells_overlay.png" id="40_f2lks"]
+[ext_resource type="PackedScene" uid="uid://b304r2nnj1kh5" path="res://Scenes/Personagens/milena.tscn" id="41_xtmhy"]
+[ext_resource type="PackedScene" uid="uid://svu53oap5a7k" path="res://Scenes/Personagens/cadu.tscn" id="42_og2xa"]
+[ext_resource type="PackedScene" uid="uid://cbwvaolanox2a" path="res://Scenes/Personagens/adhara.tscn" id="43_r0fy4"]
+[ext_resource type="PackedScene" uid="uid://bekh5yqfayfbl" path="res://Scenes/Personagens/ana.tscn" id="44_vlvu7"]
+[ext_resource type="PackedScene" uid="uid://gssk82fk6hr6" path="res://Scenes/Personagens/julia.tscn" id="45_l0vmy"]
+[ext_resource type="AudioStream" uid="uid://cc5bhv81fginf" path="res://Textures/SoundEffects/selecionar.wav" id="50_jv4sq"]
+[ext_resource type="AudioStream" uid="uid://j5kkxmts1gu3" path="res://Textures/SoundEffects/cancela.wav" id="51_f2lks"]
+[ext_resource type="AudioStream" uid="uid://dt5l7djy8uv4y" path="res://Textures/SoundEffects/text.wav" id="52_suqpp"]
+
+[sub_resource type="Gradient" id="Gradient_ou37v"]
+offsets = PackedFloat32Array(0.37333333)
+colors = PackedColorArray(0.1148968, 0.11489681, 0.1148968, 0.2901961)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0qnsc"]
+gradient = SubResource("Gradient_ou37v")
+
+[sub_resource type="Gradient" id="Gradient_5qtad"]
+offsets = PackedFloat32Array(0.37333333)
+colors = PackedColorArray(0.021434635, 0.021434637, 0.021434627, 0.87058824)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jv4sq"]
+gradient = SubResource("Gradient_5qtad")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5u3qn"]
+bg_color = Color(0.14509805, 0.14509805, 0.1764706, 0.5882353)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b1eki"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l281v"]
+bg_color = Color(0.21960784, 0.21960784, 0.21960784, 0.6666667)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pmdni"]
+bg_color = Color(0, 0, 0, 0.8235294)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kn4vo"]
+texture = ExtResource("40_f2lks")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_shhme"]
+tile_size = Vector2i(32, 32)
+sources/1 = SubResource("TileSetAtlasSource_kn4vo")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jne8x"]
+texture = ExtResource("40_f2lks")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_d8vyx"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_jne8x")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c6742"]
+texture = ExtResource("40_f2lks")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_twe5h"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_c6742")
+
+[sub_resource type="Resource" id="Resource_pmdni"]
+script = ExtResource("38_fvcul")
+tipo = 1
+metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
+
+[sub_resource type="Resource" id="Resource_pk1fs"]
+script = ExtResource("38_fvcul")
+tipo = 3
+metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
+
+[sub_resource type="Resource" id="Resource_mj43o"]
+script = ExtResource("38_fvcul")
+metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
+
+[sub_resource type="Resource" id="Resource_ere2o"]
+script = ExtResource("38_fvcul")
+tipo = 4
+metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
+
+[sub_resource type="Resource" id="Resource_mpamd"]
+script = ExtResource("38_fvcul")
+tipo = 2
+metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
+
+[sub_resource type="Resource" id="Resource_n6jjv"]
+script = ExtResource("38_fvcul")
+tipo = 3
+metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
+
+[sub_resource type="Resource" id="Resource_yrxmd"]
+script = ExtResource("38_fvcul")
+tipo = 4
+metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
+
+[sub_resource type="Resource" id="Resource_o3s8f"]
+script = ExtResource("38_fvcul")
+tipo = 1
+metadata/_custom_type_script = "uid://co7s5lm0yyc3u"
+
+[node name="Combate" type="Node2D"]
+
+[node name="CombatController" type="Node2D" parent="." node_paths=PackedStringArray("board", "input_controller", "conversation_controller", "action_menu_controller", "info_menu_controller", "state_machine", "start_state", "dialogue_state", "music")]
+script = ExtResource("1_sre2n")
+board = NodePath("Board")
+input_controller = NodePath("InputController")
+conversation_controller = NodePath("DialogueController")
+action_menu_controller = NodePath("ActionMenuController")
+info_menu_controller = NodePath("InfoMenuController")
+state_machine = NodePath("StateMachine")
+start_state = NodePath("StateMachine/InitCombatState")
+dialogue_state = NodePath("StateMachine/DialogueState")
+music = NodePath("Music")
+pers_prefab = ExtResource("2_4gsap")
+fase = 1
+
+[node name="StateMachine" type="Node" parent="CombatController" node_paths=PackedStringArray("pause_state")]
+script = ExtResource("3_goisr")
+pause_state = NodePath("PauseState")
+
+[node name="InitCombatState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("dialogue_state", "tst_ps")]
+script = ExtResource("4_r8aoa")
+dialogue_state = NodePath("../DialogueState")
+tst_ps = [null, null, null, null]
+
+[node name="DialogueState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("select_unit_state")]
+script = ExtResource("5_8p1ig")
+select_unit_state = NodePath("../SelectUnitState")
+
+[node name="SelectUnitState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("action_selection_state", "enemy_state", "dialogue_state")]
+script = ExtResource("6_qcq6d")
+action_selection_state = NodePath("../ActionSelectionState")
+enemy_state = NodePath("../EnemyState")
+dialogue_state = NodePath("../DialogueState")
+
+[node name="ActionSelectionState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("move_selection_state", "attack_selection_state", "select_unit_state")]
+script = ExtResource("7_df08h")
+move_selection_state = NodePath("../MoveSelectionState")
+attack_selection_state = NodePath("../AttackSelectionState")
+select_unit_state = NodePath("../SelectUnitState")
+menu_options = Array[Texture2D]([ExtResource("8_jv4sq"), ExtResource("9_f2lks"), ExtResource("10_suqpp"), ExtResource("11_5otov"), ExtResource("12_4pdpe"), ExtResource("13_nxi3n")])
+
+[node name="MoveSelectionState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("move_sequence_state", "action_selection_state")]
+script = ExtResource("14_kb6np")
+move_sequence_state = NodePath("../MoveSequenceState")
+action_selection_state = NodePath("../ActionSelectionState")
+
+[node name="MoveSequenceState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("select_unit_state")]
+script = ExtResource("15_r3eio")
+select_unit_state = NodePath("../SelectUnitState")
+
+[node name="AttackSelectionState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("action_selection_state", "select_unit_state", "mini_game_state")]
+script = ExtResource("16_wuyn4")
+action_selection_state = NodePath("../ActionSelectionState")
+select_unit_state = NodePath("../SelectUnitState")
+mini_game_state = NodePath("../MiniGameState")
+
+[node name="MiniGameState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("action_selection_state", "select_unit_state")]
+script = ExtResource("17_yxy08")
+action_selection_state = NodePath("../ActionSelectionState")
+select_unit_state = NodePath("../SelectUnitState")
+mini_game_mouse = ExtResource("18_nsqrw")
+mini_game_teclado = ExtResource("19_ngf8d")
+mini_game_controle = ExtResource("20_nltgv")
+
+[node name="EnemyState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("roundup_state")]
+script = ExtResource("21_4pabw")
+roundup_state = NodePath("../RoundUpState")
+
+[node name="RoundUpState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("select_unit_state")]
+script = ExtResource("22_18kjv")
+select_unit_state = NodePath("../SelectUnitState")
+
+[node name="PauseState" type="Node" parent="CombatController/StateMachine" node_paths=PackedStringArray("pause_controller")]
+script = ExtResource("23_oeecs")
+pause_controller = NodePath("../../PauseMenuController")
+
+[node name="InputController" type="Node" parent="CombatController"]
+script = ExtResource("24_1vb6e")
+
+[node name="DialogueController" type="Node" parent="CombatController" node_paths=PackedStringArray("panel", "rect")]
+script = ExtResource("25_hkf44")
+panel = NodePath("ConversationPanel")
+rect = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="CombatController/DialogueController"]
+visible = false
+offset_left = -57.0
+offset_top = -34.0
+offset_right = 444.0
+offset_bottom = 302.0
+texture = SubResource("GradientTexture1D_0qnsc")
+
+[node name="TextureRect2" type="TextureRect" parent="CombatController/DialogueController"]
+visible = false
+offset_left = -57.0
+offset_top = -34.0
+offset_right = 444.0
+offset_bottom = 302.0
+texture = SubResource("GradientTexture1D_jv4sq")
+
+[node name="Label" type="Label" parent="CombatController/DialogueController/TextureRect2"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 50.0
+offset_right = 459.0
+offset_bottom = 229.0
+theme_override_fonts/font = ExtResource("27_sps32")
+text = "OBRIGADA POR JOGAR
+
+Feito por Nbs do Rock: @nbsdorock
+Adhara, Ana e Cadu
+
+Agradecimentos especiais
+aos amigos e aos playtesters"
+
+[node name="ConversationPanel" type="Panel" parent="CombatController/DialogueController" node_paths=PackedStringArray("text", "name_l", "name_r", "img_l", "img_r")]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -116.5
+offset_top = -110.0
+offset_right = 116.5
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5u3qn")
+script = ExtResource("26_hxaie")
+text = NodePath("Text")
+name_l = NodePath("Name")
+name_r = NodePath("Name2")
+img_l = NodePath("ImgPers")
+img_r = NodePath("ImgPers2")
+
+[node name="Text" type="Label" parent="CombatController/DialogueController/ConversationPanel"]
+layout_mode = 1
+offset_left = 5.5
+offset_top = 5.0
+offset_right = 230.5
+offset_bottom = 71.0
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("27_sps32")
+theme_override_font_sizes/font_size = 11
+autowrap_mode = 2
+
+[node name="ImgPers" type="TextureRect" parent="CombatController/DialogueController/ConversationPanel"]
+layout_mode = 0
+offset_top = -62.0
+offset_right = 64.0
+offset_bottom = 2.0
+
+[node name="Name" type="Label" parent="CombatController/DialogueController/ConversationPanel"]
+layout_mode = 1
+anchors_preset = -1
+offset_top = -20.0
+offset_right = 233.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("27_sps32")
+theme_override_font_sizes/font_size = 14
+
+[node name="ImgPers2" type="TextureRect" parent="CombatController/DialogueController/ConversationPanel"]
+layout_mode = 0
+offset_left = 168.5
+offset_top = -62.0
+offset_right = 232.5
+offset_bottom = 2.0
+
+[node name="Name2" type="Label" parent="CombatController/DialogueController/ConversationPanel"]
+layout_mode = 1
+anchors_preset = -1
+offset_top = -20.0
+offset_right = 233.0
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("27_sps32")
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 2
+
+[node name="ActionMenuController" type="Node" parent="CombatController" node_paths=PackedStringArray("panel", "entry_vbox")]
+script = ExtResource("28_upm2w")
+panel = NodePath("ActionMenuPanel")
+entry_vbox = NodePath("ActionMenuPanel/VBox")
+entry_prefab = ExtResource("29_0v5gg")
+
+[node name="ActionMenuPanel" type="PanelContainer" parent="CombatController/ActionMenuController" node_paths=PackedStringArray("vbox")]
+offset_left = 27.0
+offset_top = -5.0
+offset_right = 57.0
+offset_bottom = 51.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_b1eki")
+script = ExtResource("30_sl8n7")
+vbox = NodePath("VBox")
+
+[node name="VBox" type="VBoxContainer" parent="CombatController/ActionMenuController/ActionMenuPanel"]
+layout_mode = 2
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="InfoMenuController" type="Node" parent="CombatController" node_paths=PackedStringArray("input_controller", "panel", "label_nome_pers", "label_nome_carimbo", "tex_carimbo", "label_descr_carimbo")]
+script = ExtResource("31_fwiq8")
+input_controller = NodePath("../InputController")
+panel = NodePath("InfoMenuPanel")
+label_nome_pers = NodePath("InfoMenuPanel/VBoxCont/NomePers")
+label_nome_carimbo = NodePath("InfoMenuPanel/VBoxCont/NomeCarimbo")
+tex_carimbo = NodePath("InfoMenuPanel/VBoxCont/TexCarimbo")
+label_descr_carimbo = NodePath("InfoMenuPanel/VBoxCont/DescricaoCarimbo")
+
+[node name="InfoMenuPanel" type="Panel" parent="CombatController/InfoMenuController"]
+visible = false
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -99.0
+offset_right = 99.0
+offset_bottom = 69.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l281v")
+script = ExtResource("32_6b3fq")
+
+[node name="VBoxCont" type="VBoxContainer" parent="CombatController/InfoMenuController/InfoMenuPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 43.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="NomePers" type="Label" parent="CombatController/InfoMenuController/InfoMenuPanel/VBoxCont"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("27_sps32")
+theme_override_font_sizes/font_size = 8
+text = "NOME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NomeCarimbo" type="Label" parent="CombatController/InfoMenuController/InfoMenuPanel/VBoxCont"]
+custom_minimum_size = Vector2(85, 20)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("27_sps32")
+theme_override_font_sizes/font_size = 8
+text = "usa um carimbo do tipo TIPO:"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="TexCarimbo" type="TextureRect" parent="CombatController/InfoMenuController/InfoMenuPanel/VBoxCont"]
+layout_mode = 2
+texture = ExtResource("33_cynsd")
+stretch_mode = 5
+
+[node name="DescricaoCarimbo" type="Label" parent="CombatController/InfoMenuController/InfoMenuPanel/VBoxCont"]
+custom_minimum_size = Vector2(85, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("27_sps32")
+theme_override_font_sizes/font_size = 8
+text = "Descricao do carimbo sendo bem descrito aqui"
+autowrap_mode = 2
+
+[node name="PauseMenuController" type="Node" parent="CombatController" node_paths=PackedStringArray("panel", "vbox0", "vbox1", "labels0", "labels1")]
+script = ExtResource("34_jsk6i")
+panel = NodePath("PausePanel")
+vbox0 = NodePath("PausePanel/VBox0")
+vbox1 = NodePath("PausePanel/VBox1")
+labels0 = [NodePath("PausePanel/VBox0/Iniciar"), NodePath("PausePanel/VBox0/Configs"), NodePath("PausePanel/VBox0/Sair")]
+labels1 = [NodePath("PausePanel/VBox1/Volume"), NodePath("PausePanel/VBox1/Controle"), NodePath("PausePanel/VBox1/Sair")]
+
+[node name="PausePanel" type="Panel" parent="CombatController/PauseMenuController"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -264.0
+offset_top = -40.0
+offset_right = 222.0
+offset_bottom = 335.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pmdni")
+
+[node name="VBox0" type="VBoxContainer" parent="CombatController/PauseMenuController/PausePanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -66.5
+offset_right = 70.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 31
+
+[node name="Iniciar" type="Label" parent="CombatController/PauseMenuController/PausePanel/VBox0"]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("27_sps32")
+theme_override_font_sizes/font_size = 14
+text = "Continuar"
+horizontal_alignment = 1
+
+[node name="Configs" type="Label" parent="CombatController/PauseMenuController/PausePanel/VBox0"]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("27_sps32")
+theme_override_font_sizes/font_size = 14
+text = "Configuracoes
+
+"
+horizontal_alignment = 1
+
+[node name="Sair" type="Label" parent="CombatController/PauseMenuController/PausePanel/VBox0"]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("27_sps32")
+theme_override_font_sizes/font_size = 14
+text = "Menu Principal"
+horizontal_alignment = 1
+
+[node name="VBox1" type="VBoxContainer" parent="CombatController/PauseMenuController/PausePanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -66.5
+offset_right = 70.0
+offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 31
+
+[node name="Volume" type="Label" parent="CombatController/PauseMenuController/PausePanel/VBox1"]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("27_sps32")
+theme_override_font_sizes/font_size = 14
+text = "Volume: < 20 >"
+horizontal_alignment = 1
+
+[node name="Controle" type="Label" parent="CombatController/PauseMenuController/PausePanel/VBox1"]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("27_sps32")
+theme_override_font_sizes/font_size = 14
+text = "Controle: < Mouse e Teclado >
+"
+horizontal_alignment = 1
+
+[node name="Sair" type="Label" parent="CombatController/PauseMenuController/PausePanel/VBox1"]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("27_sps32")
+theme_override_font_sizes/font_size = 14
+text = "Voltar"
+horizontal_alignment = 1
+
+[node name="Music" type="AudioStreamPlayer" parent="CombatController"]
+stream = ExtResource("35_br0pv")
+volume_db = -6.0
+autoplay = true
+parameters/looping = true
+
+[node name="Board" type="Node2D" parent="CombatController" node_paths=PackedStringArray("collision_map", "ink_map", "cell_overlay", "base", "controles1", "controles2")]
+script = ExtResource("36_8p1ig")
+grid = ExtResource("37_qcq6d")
+collision_map = NodePath("CollisionMap")
+ink_map = NodePath("InkMap")
+cell_overlay = NodePath("CellOverlay")
+base = NodePath("Base")
+controles1 = NodePath("Controles1")
+controles2 = NodePath("Controles2")
+tile_selection_texture = ExtResource("38_df08h")
+
+[node name="Base" type="Sprite2D" parent="CombatController/Board"]
+position = Vector2(192, 128)
+texture = ExtResource("39_jv4sq")
+
+[node name="CollisionMap" type="TileMapLayer" parent="CombatController/Board"]
+visible = false
+tile_map_data = PackedByteArray("AAADAAYAAQAAAAAAAAADAAIAAQAAAAAAAAAFAAEAAQAAAAAAAAAGAAUAAQAAAAAAAAAGAAYAAQAAAAAAAAAHAAUAAQAAAAAAAAAHAAYAAQAAAAAAAAAJAAUAAQAAAAAAAAADAAEAAQAAAAAAAAAEAAEAAQAAAAAAAAAGAAEAAQAAAAAAAAAHAAEAAQAAAAAAAAAIAAEAAQAAAAAAAAAJAAEAAQAAAAAAAAAJAAIAAQAAAAAAAAAIAAIAAQAAAAAAAAAHAAIAAQAAAAAAAAAGAAIAAQAAAAAAAAAFAAIAAQAAAAAAAAAEAAIAAQAAAAAAAAADAAUAAQAAAAAAAAAEAAUAAQAAAAAAAAAFAAUAAQAAAAAAAAAEAAYAAQAAAAAAAAAFAAYAAQAAAAAAAAAIAAYAAQAAAAAAAAAJAAYAAQAAAAAAAAAIAAUAAQAAAAAAAAALAAcAAQAAAAAAAAAFAAQAAQAAAAAAAAACAAEAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_shhme")
+
+[node name="InkMap" type="TileMapLayer" parent="CombatController/Board"]
+modulate = Color(0.058550663, 3.3872017e-05, 0.2586863, 0.6313726)
+tile_set = SubResource("TileSet_d8vyx")
+
+[node name="CellOverlay" type="TileMapLayer" parent="CombatController/Board"]
+tile_set = SubResource("TileSet_twe5h")
+
+[node name="Controles1" type="Label" parent="CombatController/Board"]
+offset_left = 2.0
+offset_top = 255.0
+offset_right = 122.0
+offset_bottom = 321.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("27_sps32")
+theme_override_font_sizes/font_size = 16
+text = "Espaco - 
+
+Shift - "
+
+[node name="Texto 1" type="Label" parent="CombatController/Board"]
+offset_left = 50.0
+offset_top = 255.0
+offset_right = 186.0
+offset_bottom = 321.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("27_sps32")
+theme_override_font_sizes/font_size = 16
+text = "selecionar
+
+cancelar"
+
+[node name="Controles2" type="Label" parent="CombatController/Board"]
+offset_left = 144.0
+offset_top = 255.0
+offset_right = 264.0
+offset_bottom = 321.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("27_sps32")
+theme_override_font_sizes/font_size = 16
+text = "Esc - 
+
+Z- "
+
+[node name="Texto2" type="Label" parent="CombatController/Board"]
+offset_left = 176.0
+offset_top = 256.0
+offset_right = 469.0
+offset_bottom = 322.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("27_sps32")
+theme_override_font_sizes/font_size = 16
+text = "Pause
+
+Informacoes"
+
+[node name="Personagens" type="Node2D" parent="CombatController"]
+
+[node name="Bruna" parent="CombatController/Personagens" instance=ExtResource("37_t523c")]
+position = Vector2(15, 88)
+carimbo = SubResource("Resource_pmdni")
+
+[node name="Jean" parent="CombatController/Personagens" instance=ExtResource("39_5ed2s")]
+position = Vector2(16, 29)
+carimbo = SubResource("Resource_pk1fs")
+
+[node name="Clara" parent="CombatController/Personagens" instance=ExtResource("40_e51gm")]
+position = Vector2(16, 138)
+carimbo = SubResource("Resource_mj43o")
+
+[node name="Milena" parent="CombatController/Personagens" instance=ExtResource("41_xtmhy")]
+position = Vector2(16, 196)
+carimbo = SubResource("Resource_ere2o")
+
+[node name="Cadu" parent="CombatController/Personagens" instance=ExtResource("42_og2xa")]
+position = Vector2(366, 95)
+carimbo = SubResource("Resource_mpamd")
+inimigo = true
+
+[node name="Adhara" parent="CombatController/Personagens" instance=ExtResource("43_r0fy4")]
+position = Vector2(367, 25)
+carimbo = SubResource("Resource_n6jjv")
+inimigo = true
+
+[node name="Ana" parent="CombatController/Personagens" instance=ExtResource("44_vlvu7")]
+position = Vector2(368, 145)
+carimbo = SubResource("Resource_yrxmd")
+inimigo = true
+
+[node name="Julia" parent="CombatController/Personagens" instance=ExtResource("45_l0vmy")]
+position = Vector2(368, 203)
+carimbo = SubResource("Resource_o3s8f")
+inimigo = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(192, 128)
+
+[node name="Confirma" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("50_jv4sq")
+
+[node name="Cancela" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("51_f2lks")
+
+[node name="Text" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("52_suqpp")

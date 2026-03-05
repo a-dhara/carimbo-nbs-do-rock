@@ -59,8 +59,7 @@ func OnPress(_e: bool) -> void:
 
 # Deve decidir o que fazer com o input de quit
 func OnQuit() -> void:
-	print("quit")
-	get_tree().quit() # PROVISÓRIO, DEVE ABRIR O MENU AO INVÉS DE SÓ FECHAR TUDO
+	_owner.state_machine.PauseState()
 
 # Deve decidir o que fazer com o input de movimento do mouse
 func OnMouseMotion(_e: Vector2) -> void:
